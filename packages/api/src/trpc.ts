@@ -10,8 +10,8 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { z, ZodError } from "zod/v4";
 
-import type { Auth } from "@exchange/auth";
-import { db } from "@exchange/db/client";
+import type { Auth } from "@portfolio/auth";
+import { db } from "@portfolio/db/client";
 
 /**
  * 1. CONTEXT

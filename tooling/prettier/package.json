@@ -1,5 +1,5 @@
 {
-  "name": "@exchange/prettier-config",
+  "name": "@portfolio/prettier-config",
   "private": true,
   "type": "module",
   "exports": {
@@ -16,9 +16,9 @@
     "prettier-plugin-tailwindcss": "^0.6.14"
   },
   "devDependencies": {
-    "@exchange/tsconfig": "workspace:*",
+    "@portfolio/tsconfig": "workspace:*",
     "@types/node": "^22.18.1",
     "typescript": "catalog:"
   },
-  "prettier": "@exchange/prettier-config"
+  "prettier": "@portfolio/prettier-config"
 }

@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 
-import { cn } from "@exchange/ui";
+import { cn } from "@portfolio/ui";
 
 export function Input({ className, ...props }: ComponentProps<"input">) {
   return (

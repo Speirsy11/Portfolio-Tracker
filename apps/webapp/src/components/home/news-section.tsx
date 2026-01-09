@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@exchange/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@portfolio/ui/card"
 import { ExternalLink, Newspaper } from "lucide-react"
 
 const newsArticles = [

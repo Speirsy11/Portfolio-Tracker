@@ -1,5 +1,5 @@
 {
-  "name": "@exchange/ui",
+  "name": "@portfolio/ui",
   "private": true,
   "type": "module",
   "exports": {
@@ -32,10 +32,10 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@exchange/eslint-config": "workspace:*",
-    "@exchange/prettier-config": "workspace:*",
-    "@exchange/tailwind-config": "workspace:*",
-    "@exchange/tsconfig": "workspace:*",
+    "@portfolio/eslint-config": "workspace:*",
+    "@portfolio/prettier-config": "workspace:*",
+    "@portfolio/tailwind-config": "workspace:*",
+    "@portfolio/tsconfig": "workspace:*",
     "@types/react": "catalog:react19",
     "eslint": "catalog:",
     "prettier": "catalog:",
@@ -47,5 +47,5 @@
     "react": "catalog:react19",
     "zod": "catalog:"
   },
-  "prettier": "@exchange/prettier-config"
+  "prettier": "@portfolio/prettier-config"
 }

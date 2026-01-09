@@ -10,7 +10,7 @@
     "cssVariables": true
   },
   "aliases": {
-    "utils": "@exchange/ui",
+    "utils": "@portfolio/ui",
     "components": "src/",
     "ui": "src/"
   }

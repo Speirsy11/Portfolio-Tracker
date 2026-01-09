@@ -1,5 +1,5 @@
 {
-  "name": "@exchange/webapp",
+  "name": "@portfolio/webapp",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,11 +13,11 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@exchange/api": "workspace:*",
-    "@exchange/auth": "workspace:*",
-    "@exchange/db": "workspace:*",
-    "@exchange/ui": "workspace:*",
-    "@exchange/validators": "workspace:*",
+    "@portfolio/api": "workspace:*",
+    "@portfolio/auth": "workspace:*",
+    "@portfolio/db": "workspace:*",
+    "@portfolio/ui": "workspace:*",
+    "@portfolio/validators": "workspace:*",
     "@t3-oss/env-nextjs": "^0.13.8",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
@@ -33,10 +33,10 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@exchange/eslint-config": "workspace:*",
-    "@exchange/prettier-config": "workspace:*",
-    "@exchange/tailwind-config": "workspace:*",
-    "@exchange/tsconfig": "workspace:*",
+    "@portfolio/eslint-config": "workspace:*",
+    "@portfolio/prettier-config": "workspace:*",
+    "@portfolio/tailwind-config": "workspace:*",
+    "@portfolio/tsconfig": "workspace:*",
     "@types/node": "^22.18.1",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
@@ -47,5 +47,5 @@
     "tailwindcss": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@exchange/prettier-config"
+  "prettier": "@portfolio/prettier-config"
 }

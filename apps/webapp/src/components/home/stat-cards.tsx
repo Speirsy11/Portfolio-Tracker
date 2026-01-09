@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@exchange/ui/card"
+import { Card, CardContent } from "@portfolio/ui/card"
 import { TrendingUp, TrendingDown, Activity, DollarSign } from "lucide-react"
 
 // TODO: Change static icons for visuals

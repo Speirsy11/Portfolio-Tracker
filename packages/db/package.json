@@ -1,5 +1,5 @@
 {
-  "name": "@exchange/db",
+  "name": "@portfolio/db",
   "private": true,
   "type": "module",
   "exports": {
@@ -35,14 +35,14 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@exchange/eslint-config": "workspace:*",
-    "@exchange/prettier-config": "workspace:*",
-    "@exchange/tsconfig": "workspace:*",
+    "@portfolio/eslint-config": "workspace:*",
+    "@portfolio/prettier-config": "workspace:*",
+    "@portfolio/tsconfig": "workspace:*",
     "dotenv-cli": "^10.0.0",
     "drizzle-kit": "^0.31.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@exchange/prettier-config"
+  "prettier": "@portfolio/prettier-config"
 }

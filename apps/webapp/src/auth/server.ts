@@ -3,7 +3,7 @@ import "server-only";
 import { cache } from "react";
 import { headers } from "next/headers";
 
-import { initAuth } from "@exchange/auth";
+import { initAuth } from "@portfolio/auth";
 
 import { env } from "~/env";
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@exchange/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@portfolio/ui/card"
 import { TrendingUp, TrendingDown, Coins } from "lucide-react"
 
 const cryptoData = [

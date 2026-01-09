@@ -1,5 +1,5 @@
 {
-  "extends": "@exchange/tsconfig/base.json",
+  "extends": "@portfolio/tsconfig/base.json",
   "include": ["src", "*.ts"],
   "exclude": ["node_modules"]
 }

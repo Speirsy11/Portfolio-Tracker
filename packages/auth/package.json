@@ -1,5 +1,5 @@
 {
-  "name": "@exchange/auth",
+  "name": "@portfolio/auth",
   "private": true,
   "type": "module",
   "exports": {
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@better-auth/expo": "1.3.8",
-    "@exchange/db": "workspace:*",
+    "@portfolio/db": "workspace:*",
     "@t3-oss/env-nextjs": "^0.13.8",
     "better-auth": "1.3.8",
     "next": "^15.5.2",
@@ -28,13 +28,13 @@
   },
   "devDependencies": {
     "@better-auth/cli": "1.3.8",
-    "@exchange/eslint-config": "workspace:*",
-    "@exchange/prettier-config": "workspace:*",
-    "@exchange/tsconfig": "workspace:*",
+    "@portfolio/eslint-config": "workspace:*",
+    "@portfolio/prettier-config": "workspace:*",
+    "@portfolio/tsconfig": "workspace:*",
     "@types/react": "catalog:react19",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@exchange/prettier-config"
+  "prettier": "@portfolio/prettier-config"
 }
