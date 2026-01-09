@@ -1,22 +1,5 @@
 import yahooFinance from "yahoo-finance2";
-import { z } from "zod";
-
-const NewsItemSchema = z.object({
-  uuid: z.string(),
-  title: z.string(),
-  link: z.string(),
-  providerPublishTime: z.number().or(z.date()).optional(), // library might return date or number
-  thumbnail: z.object({
-    resolutions: z.array(z.object({
-      url: z.string()
-    })).optional()
-  }).optional().nullish(),
-  publisher: z.string().optional(),
-}).passthrough();
-
-const SearchResponseSchema = z.object({
-  news: z.array(NewsItemSchema),
-});
+import { SearchResponseSchema } from "../schemas/finance";
 
 export const yahooFinanceService = {
   async searchAssets(ticker: string) {
