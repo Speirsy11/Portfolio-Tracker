@@ -42,10 +42,10 @@ trigger: always_on
 Organize files into these specific folders based on their technical role:
 
 - **`schemas/`**: Zod schemas, validation logic, and DTOs. (e.g., `user.schema.ts`)
-- **`data/`**: API calls, server actions, React Query options, and fetchers. (e.g., `user.api.ts`)
-- **`hooks/`**: Custom React hooks. (e.g., `use-auth.ts`)
+- **`data/`**: data files (e.g. questions.ts)
+- **`hooks/`**: Custom React hooks. (e.g., `use-auth.ts`) which do things like perform API calls and fetch data
 - **`components/`**: React UI components. Each component gets its own file. (e.g., `UserProfile.tsx`)
-- **`utils/`**: Pure helper functions (non-React). (e.g., `date-formatter.ts`)
+- **`utils/`**: Helper functions (non-React). (e.g., `date-formatter.ts`)
 
 ### 3. File Separation Rules
 
