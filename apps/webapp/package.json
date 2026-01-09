@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.36.7",
-    "@portfolio/ai": "workspace:*",
     "@portfolio/api": "workspace:*",
     "@portfolio/auth": "workspace:*",
     "@portfolio/db": "workspace:*",
     "@portfolio/finance": "workspace:*",
+    "@portfolio/llm": "workspace:*",
     "@portfolio/redis": "workspace:*",
     "@portfolio/ui": "workspace:*",
     "@portfolio/validators": "workspace:*",
