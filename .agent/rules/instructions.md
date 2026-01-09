@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Agent Instructions
 
 - Always use `pnpm` instead of `npm` or `yarn`
@@ -7,4 +11,5 @@
 - Name epic branches with the following convention: `epic/epic-name`
 - Name release branches with the following convention: `release/epic-name`
 - Name hotfix branches with the following convention: `hotfix/epic-name`
-- Update .agents md files to reflect changes as you go
+- Update .agent md files to reflect changes as you go
+- Make sure you follow good practice and commit smaller chunks that make up a PR if it is large

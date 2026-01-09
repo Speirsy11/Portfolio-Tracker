@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Narrative Portfolio Tracker - Implementation Checklist
 
 ## Epic 1: Project Initialisation
@@ -7,8 +11,8 @@
 
 ## Epic 2: Database & Auth
 
-- [ ] **Task 2.1:** Define Drizzle ORM schema (`Users`, `Assets`, `Portfolios`, `SentimentLogs`).
-- [ ] **Task 2.2:** Implement Clerk authentication and webhook handler (`/api/webhooks/clerk`).
+- [x] **Task 2.1:** Define Drizzle ORM schema (`Users`, `Assets`, `Portfolios`, `SentimentLogs`).
+- [x] **Task 2.2:** Implement Clerk authentication and webhook handler (`/api/webhooks/clerk`).
 
 ## Epic 3: Data Ingestion Layer
 
