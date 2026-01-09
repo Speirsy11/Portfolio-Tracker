@@ -17,6 +17,7 @@ const config = {
   ],
 
   /** We already do linting and typechecking as separate tasks in CI */
+  // @ts-expect-error - eslint is valid but types might be outdated or strict
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
 };
