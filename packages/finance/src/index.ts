@@ -10,7 +10,7 @@ const NewsItemSchema = z.object({
     resolutions: z.array(z.object({
       url: z.string()
     })).optional()
-  }).optional().nullish(), // Sometimes available
+  }).optional().nullish(),
   publisher: z.string().optional(),
 }).passthrough();
 
@@ -21,10 +21,8 @@ const SearchResponseSchema = z.object({
 export const yahooFinanceService = {
   async searchAssets(ticker: string) {
     try {
-      // newsCount option requires looking at docs, but typical use is search(query, opts)
       const result = await yahooFinance.search(ticker, { newsCount: 5 });
       
-      // Basic validation wrapper
       const parsed = SearchResponseSchema.safeParse(result);
       
       if (!parsed.success) {
@@ -40,7 +38,6 @@ export const yahooFinanceService = {
       }));
 
     } catch (error) {
-      // Enhance error for the worker
       if (error instanceof Error) {
         throw new Error(`Yahoo Finance Search Failed for ${ticker}: ${error.message}`);
       }
