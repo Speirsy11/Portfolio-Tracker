@@ -1,8 +1,17 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@portfolio/ui/card"
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts"
-import { TrendingUp } from "lucide-react"
+import { TrendingUp } from "lucide-react";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@portfolio/ui/card";
 
 // TODO: Make dynamic based on length of data available
 const portfolioData = [
@@ -18,7 +27,7 @@ const portfolioData = [
   { date: "Oct", value: 85000 },
   { date: "Nov", value: 92000 },
   { date: "Dec", value: 98500 },
-]
+];
 
 export function PortfolioChart() {
   return (
@@ -33,14 +42,18 @@ export function PortfolioChart() {
           </div>
           <div className="text-right">
             <div className="text-2xl font-bold">$98,500</div>
-            <div className="text-sm text-success">+118.9% this year</div>
+            <div className="text-success text-sm">+118.9% this year</div>
           </div>
         </div>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={portfolioData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="hsl(var(--border))"
+              opacity={0.3}
+            />
             <XAxis
               dataKey="date"
               stroke="hsl(var(--muted-foreground))"
@@ -60,11 +73,16 @@ export function PortfolioChart() {
                 if (active && payload.length) {
                   return (
                     <div className="rounded-lg border border-border bg-card p-2 shadow-sm">
-                      <div className="text-sm font-medium">${(payload[0] as { value: number }).value.toLocaleString()}</div>
+                      <div className="text-sm font-medium">
+                        $
+                        {(
+                          payload[0] as { value: number }
+                        ).value.toLocaleString()}
+                      </div>
                     </div>
-                  )
+                  );
                 }
-                return null
+                return null;
               }}
             />
             <Line
@@ -79,5 +97,5 @@ export function PortfolioChart() {
         </ResponsiveContainer>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,5 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@portfolio/ui/card"
-import { ExternalLink, Newspaper } from "lucide-react"
+import { ExternalLink, Newspaper } from "lucide-react";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@portfolio/ui/card";
 
 const newsArticles = [
   {
@@ -22,7 +23,7 @@ const newsArticles = [
     source: "DeFiInsider",
     time: "12 hours ago",
   },
-]
+];
 
 export function NewsSection() {
   return (
@@ -42,7 +43,9 @@ export function NewsSection() {
             className="group flex items-start justify-between gap-4 rounded-lg border border-border p-4 transition-colors hover:bg-muted/50"
           >
             <div className="space-y-1">
-              <h3 className="font-medium leading-tight group-hover:text-accent">{article.title}</h3>
+              <h3 className="font-medium leading-tight group-hover:text-accent">
+                {article.title}
+              </h3>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <span>{article.source}</span>
                 <span>•</span>
@@ -54,5 +57,5 @@ export function NewsSection() {
         ))}
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -7,3 +7,4 @@
 - Name epic branches with the following convention: `epic/epic-name`
 - Name release branches with the following convention: `release/epic-name`
 - Name hotfix branches with the following convention: `hotfix/epic-name`
+- Update .agents md files to reflect changes as you go

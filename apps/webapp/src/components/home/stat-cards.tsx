@@ -1,5 +1,6 @@
-import { Card, CardContent } from "@portfolio/ui/card"
-import { TrendingUp, TrendingDown, Activity, DollarSign } from "lucide-react"
+import { Activity, DollarSign, TrendingDown, TrendingUp } from "lucide-react";
+
+import { Card, CardContent } from "@portfolio/ui/card";
 
 // TODO: Change static icons for visuals
 const stats = [
@@ -31,27 +32,33 @@ const stats = [
     isPositive: true,
     icon: TrendingUp,
   },
-]
+];
 
 export function MarketStats() {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat) => {
-        const Icon = stat.icon
+        const Icon = stat.icon;
         return (
           <Card key={stat.label} className="border-border">
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="space-y-2">
-                  <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
-                  <p className="text-2xl font-bold tracking-tight">{stat.value}</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {stat.label}
+                  </p>
+                  <p className="text-2xl font-bold tracking-tight">
+                    {stat.value}
+                  </p>
                   <div className="flex items-center gap-1">
                     {stat.isPositive ? (
-                      <TrendingUp className="h-4 w-4 text-success" />
+                      <TrendingUp className="text-success h-4 w-4" />
                     ) : (
                       <TrendingDown className="h-4 w-4 text-destructive" />
                     )}
-                    <span className={`text-sm font-medium ${stat.isPositive ? "text-success" : "text-destructive"}`}>
+                    <span
+                      className={`text-sm font-medium ${stat.isPositive ? "text-success" : "text-destructive"}`}
+                    >
                       {stat.change}
                     </span>
                   </div>
@@ -62,8 +69,8 @@ export function MarketStats() {
               </div>
             </CardContent>
           </Card>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
