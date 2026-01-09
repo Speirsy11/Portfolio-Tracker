@@ -16,9 +16,9 @@ trigger: always_on
 
 ## Epic 3: Data Ingestion Layer
 
-- [ ] **Task 3.1:** Initialise Upstash Redis client and configure Rate Limiter.
-- [ ] **Task 3.2:** Build `yahoo-finance2` service adapter with Zod validation.
-- [ ] **Task 3.3:** Implement Ingestion Queue Producer (Redis List + Dedup Set).
+- [x] **Task 3.1:** Initialise Upstash Redis client and configure Rate Limiter.
+- [x] **Task 3.2:** Build `yahoo-finance2` service adapter with Zod validation.
+- [x] **Task 3.3:** Implement Ingestion Queue Producer (Redis List + Dedup Set).
 
 ## Epic 4: AI Narrative Engine
 

@@ -17,6 +17,8 @@
     "@portfolio/api": "workspace:*",
     "@portfolio/auth": "workspace:*",
     "@portfolio/db": "workspace:*",
+    "@portfolio/finance": "workspace:*",
+    "@portfolio/redis": "workspace:*",
     "@portfolio/ui": "workspace:*",
     "@portfolio/validators": "workspace:*",
     "@t3-oss/env-nextjs": "^0.13.8",
