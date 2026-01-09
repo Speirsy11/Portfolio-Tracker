@@ -51,3 +51,8 @@ Organize files into these specific folders based on their technical role:
 
 - **One Primary Export Per File:** Do not bundle multiple distinct utilities or components into a single file just because they are small.
 - **Colocation:** If a component needs a specific helper that is _never_ used elsewhere, you may keep it in the same file (bottom), but prefer separation if it grows >50 lines.
+
+### 4. File Naming Rules
+
+- ** Descriptive File Names: ** Make sure file names are simple but descriptive so people understand what they do.
+- ** Snake Case: ** Use snake case for all filenames and variables.
