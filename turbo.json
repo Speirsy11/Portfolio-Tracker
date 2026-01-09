@@ -43,17 +43,20 @@
     "ui-add": {
       "cache": false,
       "interactive": true
+    },
+    "test": {
+      "dependsOn": ["^build"]
     }
   },
   "globalEnv": [
-    "POSTGRES_URL",
-    "UPSTASH_REDIS_REST_URL",
+    "CLERK_SECRET_KEY",
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+    "NEXT_PUBLIC_CLERK_SIGN_IN_URL",
+    "NEXT_PUBLIC_CLERK_SIGN_UP_URL",
+    "OPENAI_API_KEY",
     "UPSTASH_REDIS_REST_TOKEN",
-    "AUTH_DISCORD_ID",
-    "AUTH_DISCORD_SECRET",
-    "AUTH_REDIRECT_PROXY_URL",
-    "AUTH_SECRET",
-    "PORT"
+    "UPSTASH_REDIS_REST_URL",
+    "YAHOO_FINANCE_API_KEY"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",
@@ -61,6 +64,7 @@
     "VERCEL",
     "VERCEL_ENV",
     "VERCEL_URL",
-    "npm_lifecycle_event"
+    "npm_lifecycle_event",
+    "PORT"
   ]
 }

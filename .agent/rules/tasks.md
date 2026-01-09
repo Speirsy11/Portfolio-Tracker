@@ -22,7 +22,7 @@ trigger: always_on
 
 ## Epic 4: AI Narrative Engine
 
-- [ ] **Task 4.1:** Integrate Vercel AI SDK `generateObject` with OpenAI provider.
+- [ ] **Task 4.1:** Integrate Vercel AI SDK `generateObject` with OpenAI provider (leave implementation easy to add support for different providers in future e.g. anthropic, google, etc.).
 - [ ] **Task 4.2:** Engineer the Financial Analyst system prompt and context management.
 
 ## Epic 5: Background Workers

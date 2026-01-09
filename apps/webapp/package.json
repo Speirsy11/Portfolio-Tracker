@@ -18,6 +18,7 @@
     "@portfolio/auth": "workspace:*",
     "@portfolio/db": "workspace:*",
     "@portfolio/finance": "workspace:*",
+    "@portfolio/llm": "workspace:*",
     "@portfolio/redis": "workspace:*",
     "@portfolio/ui": "workspace:*",
     "@portfolio/validators": "workspace:*",
