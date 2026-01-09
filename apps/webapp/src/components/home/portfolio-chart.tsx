@@ -60,7 +60,7 @@ export function PortfolioChart() {
                 if (active && payload.length) {
                   return (
                     <div className="rounded-lg border border-border bg-card p-2 shadow-sm">
-                      <div className="text-sm font-medium">${payload[0].value?.toLocaleString()}</div>
+                      <div className="text-sm font-medium">${(payload[0] as { value: number }).value.toLocaleString()}</div>
                     </div>
                   )
                 }
