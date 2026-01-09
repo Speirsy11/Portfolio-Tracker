@@ -2,8 +2,8 @@
 
 ## Epic 1: Project Initialisation
 
-- [ ] **Task 1.1:** Check if next.js is on most recent version
-- [ ] **Task 1.2:** Create `proxy.ts` in `apps/web` for Next.js 16 request handling.
+- [x] **Task 1.1:** Check if next.js is on most recent version
+- [x] **Task 1.2:** Create `proxy.ts` in `apps/web` for Next.js 16 request handling.
 
 ## Epic 2: Database & Auth
 

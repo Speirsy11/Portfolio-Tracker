@@ -3,10 +3,7 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./middleware": "./src/middleware.ts",
-    "./client": "./src/client.ts",
-    "./env": "./env.ts"
+    ".": "./src/index.ts"
   },
   "license": "MIT",
   "scripts": {
@@ -18,6 +15,7 @@
   },
   "dependencies": {
     "@better-auth/expo": "1.3.8",
+    "@clerk/nextjs": "^6.36.7",
     "@portfolio/db": "workspace:*",
     "@t3-oss/env-nextjs": "^0.13.8",
     "better-auth": "1.3.8",
