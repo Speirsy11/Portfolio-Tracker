@@ -1,5 +1,5 @@
 import { generateObject } from "ai";
-import { z } from 'zod/v4';
+import { z } from "zod/v4";
 
 import { ANALYST_PROMPT } from "../data/prompts/analyst";
 import { defaultModel } from "../providers/index";
