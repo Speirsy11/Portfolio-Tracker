@@ -1,8 +1,9 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import type { NextFetchEvent, NextRequest } from "next/server";
 
 const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
 
-export function proxy(request: Request) {
+export function proxy(request: NextRequest, event: NextFetchEvent) {
   // Security Headers
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("X-Frame-Options", "DENY");
@@ -13,7 +14,7 @@ export function proxy(request: Request) {
 
   return clerkMiddleware(async (auth, req) => {
     if (isProtectedRoute(req)) await auth.protect();
-  })(request);
+  })(request, event);
 }
 
 export const config = {
