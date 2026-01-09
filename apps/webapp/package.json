@@ -13,6 +13,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.36.7",
     "@portfolio/api": "workspace:*",
     "@portfolio/auth": "workspace:*",
     "@portfolio/db": "workspace:*",
@@ -24,7 +25,7 @@
     "@trpc/server": "catalog:",
     "@trpc/tanstack-react-query": "catalog:",
     "lucide-react": "^0.552.0",
-    "next": "^15.5.2",
+    "next": "^16.1.1",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "recharts": "^3.3.0",
