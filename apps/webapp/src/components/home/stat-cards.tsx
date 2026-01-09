@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@exchange/ui/card"
 import { TrendingUp, TrendingDown, Activity, DollarSign } from "lucide-react"
 
+// TODO: Change static icons for visuals
 const stats = [
   {
     label: "Total Market Cap",

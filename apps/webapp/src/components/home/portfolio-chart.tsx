@@ -57,7 +57,7 @@ export function PortfolioChart() {
             />
             <Tooltip
               content={({ active, payload }) => {
-                if (active && payload && payload.length) {
+                if (active && payload.length) {
                   return (
                     <div className="rounded-lg border border-border bg-card p-2 shadow-sm">
                       <div className="text-sm font-medium">${payload[0].value?.toLocaleString()}</div>
@@ -70,10 +70,10 @@ export function PortfolioChart() {
             <Line
               type="monotone"
               dataKey="value"
-              stroke="hsl(180 100% 50%)"
+              stroke="hsla(125, 100%, 50%, 1.00)"
               strokeWidth={3}
               dot={false}
-              activeDot={{ r: 6, fill: "hsl(180 100% 50%)" }}
+              activeDot={{ r: 6, fill: "hsla(125, 100%, 50%, 1.00)" }}
             />
           </LineChart>
         </ResponsiveContainer>
