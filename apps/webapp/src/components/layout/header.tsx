@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { TrendingUp, Settings } from "lucide-react"
+import Link from "next/link";
+import { Settings, TrendingUp } from "lucide-react";
 
 export function Header() {
   return (
@@ -12,7 +12,7 @@ export function Header() {
           <span className="text-xl font-bold">CryptoExchange</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden items-center gap-8 md:flex">
           <Link
             href="/markets"
             className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
@@ -34,7 +34,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <button className="hidden md:inline-flex h-9 items-center justify-center rounded-md px-4 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted">
+          <button className="hidden h-9 items-center justify-center rounded-md px-4 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted md:inline-flex">
             Sign In / Sign Up
           </button>
           <button className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
@@ -44,5 +44,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

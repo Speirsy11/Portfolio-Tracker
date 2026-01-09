@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@portfolio/ui/card"
-import { TrendingUp, TrendingDown, Coins } from "lucide-react"
+import { Coins, TrendingDown, TrendingUp } from "lucide-react";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@portfolio/ui/card";
 
 const cryptoData = [
   {
@@ -104,13 +105,13 @@ const cryptoData = [
     volume24h: 320000000,
     icon: "T",
   },
-]
+];
 
 function formatNumber(num: number): string {
-  if (num >= 1e12) return `$${(num / 1e12).toFixed(2)}T`
-  if (num >= 1e9) return `$${(num / 1e9).toFixed(2)}B`
-  if (num >= 1e6) return `$${(num / 1e6).toFixed(2)}M`
-  return `$${num.toFixed(2)}`
+  if (num >= 1e12) return `$${(num / 1e12).toFixed(2)}T`;
+  if (num >= 1e9) return `$${(num / 1e9).toFixed(2)}B`;
+  if (num >= 1e6) return `$${(num / 1e6).toFixed(2)}M`;
+  return `$${num.toFixed(2)}`;
 }
 
 export function CryptoList() {
@@ -118,10 +119,12 @@ export function CryptoList() {
     <Card className="border-border">
       <CardHeader>
         <div className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-chart-1/10">
-            <Coins className="h-5 w-5 text-chart-1" />
+          <div className="bg-chart-1/10 flex h-10 w-10 items-center justify-center rounded-lg">
+            <Coins className="text-chart-1 h-5 w-5" />
           </div>
-          <CardTitle className="text-xl">Top Cryptocurrencies by Market Cap</CardTitle>
+          <CardTitle className="text-xl">
+            Top Cryptocurrencies by Market Cap
+          </CardTitle>
         </div>
       </CardHeader>
       <CardContent className="p-0">
@@ -129,18 +132,35 @@ export function CryptoList() {
           <table className="w-full">
             <thead className="border-b border-border bg-muted/50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground">#</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground">Name</th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground">Price</th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground">24h %</th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground">Market Cap</th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground">Volume (24h)</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground">
+                  #
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground">
+                  Name
+                </th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground">
+                  Price
+                </th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground">
+                  24h %
+                </th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground">
+                  Market Cap
+                </th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground">
+                  Volume (24h)
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
               {cryptoData.map((crypto) => (
-                <tr key={crypto.rank} className="transition-colors hover:bg-muted/50">
-                  <td className="px-6 py-4 text-sm text-muted-foreground">{crypto.rank}</td>
+                <tr
+                  key={crypto.rank}
+                  className="transition-colors hover:bg-muted/50"
+                >
+                  <td className="px-6 py-4 text-sm text-muted-foreground">
+                    {crypto.rank}
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-sm font-bold">
@@ -148,7 +168,9 @@ export function CryptoList() {
                       </div>
                       <div>
                         <div className="font-medium">{crypto.name}</div>
-                        <div className="text-sm text-muted-foreground">{crypto.symbol}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {crypto.symbol}
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -158,7 +180,9 @@ export function CryptoList() {
                   <td className="px-6 py-4 text-right">
                     <div
                       className={`inline-flex items-center gap-1 rounded-md px-2 py-1 text-sm font-medium ${
-                        crypto.change24h >= 0 ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"
+                        crypto.change24h >= 0
+                          ? "bg-success/10 text-success"
+                          : "bg-destructive/10 text-destructive"
                       }`}
                     >
                       {crypto.change24h >= 0 ? (
@@ -169,7 +193,9 @@ export function CryptoList() {
                       {Math.abs(crypto.change24h).toFixed(2)}%
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-right font-mono text-sm">{formatNumber(crypto.marketCap)}</td>
+                  <td className="px-6 py-4 text-right font-mono text-sm">
+                    {formatNumber(crypto.marketCap)}
+                  </td>
                   <td className="px-6 py-4 text-right font-mono text-sm text-muted-foreground">
                     {formatNumber(crypto.volume24h)}
                   </td>
@@ -180,5 +206,5 @@ export function CryptoList() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

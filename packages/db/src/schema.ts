@@ -1,11 +1,11 @@
 import {
-  pgTable,
-  uuid,
-  varchar,
-  text,
-  timestamp,
   decimal,
   index,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+  varchar,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 

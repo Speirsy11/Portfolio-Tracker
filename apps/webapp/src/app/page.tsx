@@ -1,8 +1,8 @@
-import { Header } from "../components/layout/header"
-import { MarketStats } from "../components/home/stat-cards"
-import { CryptoList } from "../components/home/top-cryptos"
-import { PortfolioChart } from "../components/home/portfolio-chart"
-import { NewsSection } from "../components/home/news-section"
+import { NewsSection } from "../components/home/news-section";
+import { PortfolioChart } from "../components/home/portfolio-chart";
+import { MarketStats } from "../components/home/stat-cards";
+import { CryptoList } from "../components/home/top-cryptos";
+import { Header } from "../components/layout/header";
 
 export default function Home() {
   return (
@@ -10,8 +10,12 @@ export default function Home() {
       <Header />
       <main className="container mx-auto space-y-8 px-4 py-8">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">Cryptocurrency Market Overview</h1>
-          <p className="text-lg text-muted-foreground">Track real-time prices, market caps, and trading volumes</p>
+          <h1 className="text-4xl font-bold tracking-tight">
+            Cryptocurrency Market Overview
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Track real-time prices, market caps, and trading volumes
+          </p>
         </div>
 
         <MarketStats />
@@ -27,5 +31,5 @@ export default function Home() {
         </div>
       </main>
     </div>
-  )
+  );
 }
