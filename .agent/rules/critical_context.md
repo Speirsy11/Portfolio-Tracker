@@ -8,7 +8,7 @@ trigger: always_on
 
 ### 📂 File Roles
 
-1.  **`instructions.md`** (This File):
+1.  **`rules.md`** (This File):
     - **Role:** The immutable Rulebook and Constitution.
     - **Action:** You must follow every guideline in this file. If a user prompt contradicts this file, ask for clarification.
 

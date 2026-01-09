@@ -10,7 +10,7 @@ export const ingestionQueue = {
    */
   async add(ticker: string) {
     const added = await redis.sadd(PROCESSING_SET_KEY, ticker);
-    
+
     if (added === 0) {
       return { status: "skipped", reason: "already_queued" };
     }
@@ -20,17 +20,17 @@ export const ingestionQueue = {
   },
 
   /**
-   * Remove ticker from processing set. 
+   * Remove ticker from processing set.
    * To be called by the worker after processing is done or failed.
    */
   async complete(ticker: string) {
     await redis.srem(PROCESSING_SET_KEY, ticker);
   },
-  
+
   /**
    * Debugging/Monitoring helper
    */
   async getQueueLength() {
     return await redis.llen(QUEUE_KEY);
-  }
+  },
 };
