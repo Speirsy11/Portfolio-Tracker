@@ -2,9 +2,8 @@
 
 ## Epic 1: Project Initialisation
 
-- [ ] **Task 1.1:** Scaffold Turborepo workspace (apps/web, packages/ui, packages/db, packages/config).
-- [ ] **Task 1.2:** Configure Biome for linting/formatting and enforce strict TypeScript settings.
-- [ ] **Task 1.3:** Create `proxy.ts` in `apps/web` for Next.js 16 request handling.
+- [ ] **Task 1.1:** Check if next.js is on most recent version
+- [ ] **Task 1.2:** Create `proxy.ts` in `apps/web` for Next.js 16 request handling.
 
 ## Epic 2: Database & Auth
 
