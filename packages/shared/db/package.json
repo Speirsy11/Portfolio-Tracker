@@ -21,12 +21,13 @@
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "push": "pnpm with-env drizzle-kit push",
     "studio": "pnpm with-env drizzle-kit studio",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../../.env --",
+    "boundaries": "eslint . --config ../../../tooling/eslint/boundaries.js"
   },
   "dependencies": {
     "@vercel/postgres": "^0.10.0",

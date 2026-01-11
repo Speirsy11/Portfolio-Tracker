@@ -1,5 +1,5 @@
 {
-  "name": "@portfolio/validators",
+  "name": "@portfolio/redis",
   "private": true,
   "type": "module",
   "exports": {
@@ -13,12 +13,14 @@
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "boundaries": "eslint . --config ../../../tooling/eslint/boundaries.js"
   },
   "dependencies": {
-    "zod": "catalog:"
+    "@upstash/ratelimit": "catalog:",
+    "@upstash/redis": "catalog:"
   },
   "devDependencies": {
     "@portfolio/eslint-config": "workspace:*",

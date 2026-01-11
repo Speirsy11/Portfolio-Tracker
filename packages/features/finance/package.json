@@ -1,7 +1,6 @@
 {
-  "name": "@portfolio/llm",
+  "name": "@portfolio/finance",
   "private": true,
-  "version": "0.1.0",
   "type": "module",
   "exports": {
     ".": {
@@ -14,14 +13,13 @@
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
-    "test": "vitest run",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "boundaries": "eslint . --config ../../../tooling/eslint/boundaries.js"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^1.0.0",
-    "ai": "^4.0.0",
+    "yahoo-finance2": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
@@ -30,8 +28,7 @@
     "@portfolio/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "^2.1.8"
+    "typescript": "catalog:"
   },
   "prettier": "@portfolio/prettier-config"
 }

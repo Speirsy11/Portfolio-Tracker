@@ -1,5 +1,5 @@
 {
-  "name": "@portfolio/redis",
+  "name": "@portfolio/api",
   "private": true,
   "type": "module",
   "exports": {
@@ -13,13 +13,18 @@
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "boundaries": "eslint . --config ../../../tooling/eslint/boundaries.js"
   },
   "dependencies": {
-    "@upstash/ratelimit": "catalog:",
-    "@upstash/redis": "catalog:"
+    "@portfolio/auth": "workspace:*",
+    "@portfolio/db": "workspace:*",
+    "@portfolio/validators": "workspace:*",
+    "@trpc/server": "catalog:",
+    "superjson": "2.2.2",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@portfolio/eslint-config": "workspace:*",
