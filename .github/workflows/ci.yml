@@ -31,8 +31,19 @@ jobs:
         shell: bash
         run: cp .env.example .env
 
-      - name: Lint (Boundaries)
-        run: pnpm lint && pnpm lint:ws && pnpm boundaries
+      - name: Lint
+        run: pnpm lint && pnpm lint:ws
+
+  boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup
+        uses: ./tooling/github/setup
+
+      - name: Boundaries
+        run: pnpm boundaries
 
   format:
     runs-on: ubuntu-latest
