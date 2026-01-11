@@ -23,11 +23,14 @@
     "postinstall": "pnpm lint:ws",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
-    "ui-add": "turbo run ui-add"
+    "ui-add": "turbo run ui-add",
+    "boundaries": "turbo run boundaries"
   },
   "devDependencies": {
+    "@portfolio/eslint-config": "workspace:^",
     "@portfolio/prettier-config": "workspace:*",
     "@turbo/gen": "^2.5.6",
+    "glob": "^13.0.0",
     "prettier": "catalog:",
     "turbo": "^2.5.6",
     "typescript": "catalog:"

@@ -1,6 +1,8 @@
 packages:
   - apps/*
-  - packages/*
+  - packages/shared/*
+  - packages/features/*
+  - packages/compositions/*
   - tooling/*
 
 catalog:
