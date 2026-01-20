@@ -23,8 +23,7 @@
     "postinstall": "pnpm lint:ws",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
-    "ui-add": "turbo run ui-add",
-    "boundaries": "turbo run boundaries"
+    "ui-add": "turbo run ui-add"
   },
   "devDependencies": {
     "@portfolio/eslint-config": "workspace:^",

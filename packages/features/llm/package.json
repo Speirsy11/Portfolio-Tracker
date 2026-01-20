@@ -17,8 +17,7 @@
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "boundaries": "eslint . --config ../../../tooling/eslint/boundaries.js"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.0",

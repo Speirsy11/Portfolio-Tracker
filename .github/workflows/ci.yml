@@ -43,7 +43,7 @@ jobs:
         uses: ./tooling/github/setup
 
       - name: Boundaries
-        run: pnpm boundaries
+        run: pnpm exec turbo boundaries
 
   format:
     runs-on: ubuntu-latest

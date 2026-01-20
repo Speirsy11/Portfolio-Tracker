@@ -5,7 +5,7 @@ import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
 import turboPlugin from "eslint-plugin-turbo";
-import boundariesPlugin from "eslint-plugin-boundaries";
+
 import tseslint from "typescript-eslint";
 
 /**
@@ -47,29 +47,8 @@ export default tseslint.config(
     plugins: {
       import: importPlugin,
       turbo: turboPlugin,
-      boundaries: boundariesPlugin,
     },
-    settings: {
-      "boundaries/include": ["apps/*", "packages/**/*"],
-      "boundaries/elements": [
-        {
-          type: "app",
-          pattern: "apps/*",
-        },
-        {
-          type: "composition",
-          pattern: "packages/compositions/*",
-        },
-        {
-          type: "feature",
-          pattern: "packages/features/*",
-        },
-        {
-          type: "shared",
-          pattern: "packages/shared/*",
-        },
-      ],
-    },
+
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
@@ -78,26 +57,7 @@ export default tseslint.config(
     ],
     rules: {
       ...turboPlugin.configs.recommended.rules,
-      "boundaries/element-types": [
-        "error",
-        {
-          default: "disallow",
-          rules: [
-            {
-              from: ["app", "composition"],
-              allow: ["app", "composition", "feature", "shared"],
-            },
-            {
-              from: ["feature"],
-              allow: ["shared", "feature"],
-            },
-            {
-              from: ["shared"],
-              allow: ["shared"],
-            },
-          ],
-        },
-      ],
+
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
