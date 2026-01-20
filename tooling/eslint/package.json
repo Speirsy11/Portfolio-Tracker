@@ -27,7 +27,6 @@
     "@portfolio/prettier-config": "workspace:*",
     "@portfolio/tsconfig": "workspace:*",
     "eslint": "catalog:",
-
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
