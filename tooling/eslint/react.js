@@ -11,6 +11,7 @@ export default [
     },
     rules: {
       ...reactPlugin.configs["jsx-runtime"].rules,
+      // @ts-expect-error: eslint-plugin-react-hooks types missing configs
       ...reactHooks.configs.recommended[0].rules,
     },
     languageOptions: {
