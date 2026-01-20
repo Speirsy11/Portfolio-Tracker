@@ -1,24 +1,37 @@
 import { generateObject } from "ai";
 import { z } from "zod/v4";
 
-import { ANALYST_PROMPT } from "../data/prompts/analyst";
+import { createAnalystPrompt } from "../data/prompts/analyst";
 import { defaultModel } from "../providers/llm-provider";
 
-export const generateFinancialReport = async (context: string) => {
+/**
+ * Schema for AI-generated sentiment analysis per plan.md specification
+ */
+export const sentimentSchema = z.object({
+  sentimentScore: z
+    .number()
+    .min(-1)
+    .max(1)
+    .describe("Sentiment score from -1 (Bearish) to 1 (Bullish)"),
+  reasoning: z.string().describe("Why this sentiment?"),
+  keyTopics: z.array(z.string()).describe("Key topics extracted from the news"),
+});
+
+export type SentimentAnalysis = z.infer<typeof sentimentSchema>;
+
+/**
+ * Generate a financial sentiment analysis for the given asset and news context
+ * @param assetName - The name/ticker of the asset being analyzed
+ * @param context - News headlines and summaries to analyze (limit to last 5)
+ */
+export const generateFinancialReport = async (
+  assetName: string,
+  context: string,
+) => {
   return generateObject({
     model: defaultModel,
-    system: ANALYST_PROMPT,
+    system: createAnalystPrompt(assetName),
     prompt: context,
-    schema: z.object({
-      summary: z
-        .string()
-        .describe("A concise executive summary of the current situation."),
-      sentiment: z
-        .enum(["positive", "negative", "neutral"])
-        .describe("Overall market sentiment based on the data."),
-      keyPoints: z
-        .array(z.string())
-        .describe("A bulleted list of critical factors influencing the asset."),
-    }),
+    schema: sentimentSchema,
   });
 };
