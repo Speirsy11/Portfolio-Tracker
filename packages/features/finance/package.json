@@ -1,5 +1,5 @@
 {
-  "name": "@portfolio/api",
+  "name": "@portfolio/finance",
   "private": true,
   "type": "module",
   "exports": {
@@ -13,16 +13,12 @@
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@portfolio/auth": "workspace:*",
-    "@portfolio/db": "workspace:*",
-    "@portfolio/validators": "workspace:*",
-    "@trpc/server": "catalog:",
-    "superjson": "2.2.2",
+    "yahoo-finance2": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {

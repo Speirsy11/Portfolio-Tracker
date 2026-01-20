@@ -8,6 +8,7 @@
   "packageManager": "pnpm@10.15.1",
   "scripts": {
     "build": "turbo run build",
+    "boundaries": "turbo boundaries",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
     "auth:generate": "pnpm -F @portfolio/auth generate",
@@ -26,8 +27,10 @@
     "ui-add": "turbo run ui-add"
   },
   "devDependencies": {
+    "@portfolio/eslint-config": "workspace:^",
     "@portfolio/prettier-config": "workspace:*",
     "@turbo/gen": "^2.5.6",
+    "glob": "^13.0.0",
     "prettier": "catalog:",
     "turbo": "^2.5.6",
     "typescript": "catalog:"

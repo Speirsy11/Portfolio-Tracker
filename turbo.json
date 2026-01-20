@@ -22,6 +22,7 @@
       "dependsOn": ["^topo", "^build"],
       "outputs": [".cache/.eslintcache"]
     },
+
     "typecheck": {
       "dependsOn": ["^topo", "^build"],
       "outputs": [".cache/tsbuildinfo.json"]
@@ -46,6 +47,35 @@
     },
     "test": {
       "dependsOn": ["^build"]
+    }
+  },
+  "boundaries": {
+    "tags": {
+      "type:app": {
+        "dependencies": {
+          "allow": ["type:composition", "type:feature", "type:shared", "type:config"]
+        }
+      },
+      "type:composition": {
+        "dependencies": {
+          "allow": ["type:composition", "type:feature", "type:shared", "type:config"]
+        }
+      },
+      "type:feature": {
+        "dependencies": {
+          "allow": ["type:feature", "type:shared", "type:config"]
+        }
+      },
+      "type:shared": {
+        "dependencies": {
+          "allow": ["type:shared", "type:config"]
+        }
+      },
+      "type:config": {
+        "dependencies": {
+          "allow": ["type:config", "type:shared"]
+        }
+      }
     }
   },
   "globalEnv": [
