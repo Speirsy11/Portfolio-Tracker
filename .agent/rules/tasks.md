@@ -32,8 +32,8 @@ trigger: always_on
 
 ## Epic 6: Dashboard UI
 
-- [ ] **Task 6.1:** Build Portfolio Dashboard page using React Server Components and direct DB queries.
-- [ ] **Task 6.2:** Implement Tremor `<AreaChart />` for Price vs. Sentiment visualisation.
+- [x] **Task 6.1:** Build Portfolio Dashboard page using React Server Components and direct DB queries.
+- [x] **Task 6.2:** Implement Recharts `<AreaChart />` for Sentiment visualisation.
 
 ## Epic 7: Testing & CI/CD
 

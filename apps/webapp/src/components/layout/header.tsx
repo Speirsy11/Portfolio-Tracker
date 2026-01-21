@@ -1,5 +1,14 @@
 import Link from "next/link";
-import { Settings, TrendingUp } from "lucide-react";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
+import { LayoutDashboard, TrendingUp } from "lucide-react";
+
+import { Button } from "@portfolio/ui/button";
 
 export function Header() {
   return (
@@ -9,38 +18,52 @@ export function Header() {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
             <TrendingUp className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-bold">CryptoExchange</span>
+          <span className="text-xl font-bold">Portfolio Tracker</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           <Link
-            href="/markets"
+            href="/"
             className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
           >
             Markets
           </Link>
-          <Link
-            href="/strategies"
-            className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
-          >
-            Strategies
-          </Link>
-          <Link
-            href="/portfolio"
-            className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
-          >
-            Portfolio
-          </Link>
+          <SignedIn>
+            <Link
+              href="/dashboard"
+              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+            >
+              Dashboard
+            </Link>
+          </SignedIn>
         </nav>
 
         <div className="flex items-center gap-4">
-          <button className="hidden h-9 items-center justify-center rounded-md px-4 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted md:inline-flex">
-            Sign In / Sign Up
-          </button>
-          <button className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
-            <Settings className="h-4 w-4" />
-            Settings
-          </button>
+          <SignedOut>
+            <SignInButton mode="modal">
+              <Button variant="ghost" size="sm">
+                Sign In
+              </Button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <Button size="sm">Sign Up</Button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <Link href="/dashboard">
+              <Button variant="outline" size="sm" className="hidden md:flex">
+                <LayoutDashboard className="mr-2 h-4 w-4" />
+                Dashboard
+              </Button>
+            </Link>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "h-9 w-9",
+                },
+              }}
+            />
+          </SignedIn>
         </div>
       </div>
     </header>
