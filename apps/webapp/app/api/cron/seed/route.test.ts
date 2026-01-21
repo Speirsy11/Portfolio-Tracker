@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+// Import after mocks are set up
+import { GET } from "./route";
+
 // Mock dependencies before importing the route handler
 vi.mock("@portfolio/db", () => ({
   db: {
@@ -23,9 +26,6 @@ vi.mock("~/env", () => ({
     CRON_SECRET: "test-secret",
   },
 }));
-
-// Import after mocks are set up
-import { GET } from "./route";
 
 interface SeedResponse {
   success?: boolean;

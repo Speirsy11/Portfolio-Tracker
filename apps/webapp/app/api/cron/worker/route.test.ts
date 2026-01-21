@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+// Import after mocks are set up
+import { GET } from "./route";
+
 // Use vi.hoisted to ensure mock functions are available when vi.mock is hoisted
 const { mockPop, mockComplete, mockGetQueueLength } = vi.hoisted(() => ({
   mockPop: vi.fn(),
@@ -69,9 +72,6 @@ vi.mock("~/env", () => ({
     CRON_SECRET: "test-secret",
   },
 }));
-
-// Import after mocks are set up
-import { GET } from "./route";
 
 interface WorkerResponse {
   success?: boolean;
