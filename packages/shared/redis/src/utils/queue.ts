@@ -20,6 +20,15 @@ export const ingestionQueue = {
   },
 
   /**
+   * Pops the next ticker from the queue for processing.
+   * Uses RPOP for FIFO order (items pushed with LPUSH, popped with RPOP).
+   * Returns null if queue is empty.
+   */
+  async pop(): Promise<string | null> {
+    return await redis.rpop(QUEUE_KEY);
+  },
+
+  /**
    * Remove ticker from processing set.
    * To be called by the worker after processing is done or failed.
    */
