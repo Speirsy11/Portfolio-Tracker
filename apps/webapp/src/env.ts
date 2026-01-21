@@ -19,6 +19,8 @@ export const env = createEnv({
     CLERK_WEBHOOK_SECRET: z.string(),
     UPSTASH_REDIS_REST_URL: z.string().url(),
     UPSTASH_REDIS_REST_TOKEN: z.string(),
+    CRON_SECRET: z.string(),
+    OPENAI_API_KEY: z.string(),
   },
 
   /**

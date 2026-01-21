@@ -22,13 +22,13 @@ trigger: always_on
 
 ## Epic 4: AI Narrative Engine
 
-- [ ] **Task 4.1:** Integrate Vercel AI SDK `generateObject` with OpenAI provider (leave implementation easy to add support for different providers in future e.g. anthropic, google, etc.).
-- [ ] **Task 4.2:** Engineer the Financial Analyst system prompt and context management.
+- [x] **Task 4.1:** Integrate Vercel AI SDK `generateObject` with OpenAI provider (leave implementation easy to add support for different providers in future e.g. anthropic, google, etc.).
+- [x] **Task 4.2:** Engineer the Financial Analyst system prompt and context management.
 
 ## Epic 5: Background Workers
 
-- [ ] **Task 5.1:** Configure "Seeder" Cron Job (`/api/cron/seed`) to populate the queue.
-- [ ] **Task 5.2:** Build "Processor" Worker (`/api/cron/worker`) with time-budgeting loop.
+- [x] **Task 5.1:** Configure "Seeder" Cron Job (`/api/cron/seed`) to populate the queue.
+- [x] **Task 5.2:** Build "Processor" Worker (`/api/cron/worker`) with time-budgeting loop.
 
 ## Epic 6: Dashboard UI
 
@@ -37,5 +37,5 @@ trigger: always_on
 
 ## Epic 7: Testing & CI/CD
 
-- [ ] **Task 7.1:** Write unit tests for Worker logic using Vitest.
+- [x] **Task 7.1:** Write unit tests for Worker logic using Vitest.
 - [ ] **Task 7.2:** Create E2E tests for the "Add Asset" flow using Playwright.
