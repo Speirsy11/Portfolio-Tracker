@@ -5,6 +5,7 @@ import { db } from "@portfolio/db";
 import { Assets, SentimentLogs } from "@portfolio/db/schema";
 import { yahooFinanceService } from "@portfolio/finance";
 import { generateFinancialReport } from "@portfolio/llm";
+import type { SentimentAnalysis } from "@portfolio/llm";
 import { ingestionQueue } from "@portfolio/redis";
 
 import { env } from "~/env";
@@ -58,7 +59,8 @@ export async function GET(request: Request) {
         );
 
         // Extract sentiment data with proper types
-        const { sentimentScore, reasoning } = sentimentResult.object;
+        const { sentimentScore, reasoning } =
+          sentimentResult.object as SentimentAnalysis;
 
         // Find asset ID from database
         const asset = await db.query.Assets.findFirst({

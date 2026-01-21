@@ -1,10 +1,12 @@
 import { NextRequest } from "next/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-// Mock dependencies before importing the route handler
-const mockPop = vi.fn();
-const mockComplete = vi.fn();
-const mockGetQueueLength = vi.fn().mockResolvedValue(0);
+// Use vi.hoisted to ensure mock functions are available when vi.mock is hoisted
+const { mockPop, mockComplete, mockGetQueueLength } = vi.hoisted(() => ({
+  mockPop: vi.fn(),
+  mockComplete: vi.fn(),
+  mockGetQueueLength: vi.fn().mockResolvedValue(0),
+}));
 
 vi.mock("@portfolio/redis", () => ({
   ingestionQueue: {
