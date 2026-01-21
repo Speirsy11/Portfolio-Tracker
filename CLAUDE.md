@@ -220,13 +220,19 @@ hotfix/epic-name                # Hotfixes
 
 ## Pre-PR Checklist
 
-Before submitting any PR, run:
+Before submitting any PR, run all CI checks:
 
 ```bash
-pnpm typecheck && pnpm lint && pnpm format
+pnpm typecheck && pnpm lint && pnpm format && pnpm boundaries
 ```
 
-Fix all errors before submitting.
+**All checks must pass before submitting:**
+- `pnpm typecheck` - TypeScript compiler check
+- `pnpm lint` - ESLint checks
+- `pnpm format` - Prettier formatting check
+- `pnpm boundaries` - Package dependency boundaries check
+
+Fix all errors before submitting. Use `pnpm lint:fix` and `pnpm format:fix` to auto-fix issues.
 
 ## Agent Context Files
 
