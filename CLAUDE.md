@@ -166,6 +166,7 @@ Tables defined in `/packages/shared/db/src/schema.ts`:
 - **Users** - Synced from Clerk via webhook
 - **Assets** - Stock symbols and metadata
 - **Portfolios** - User portfolios (cascade delete with user)
+- **PortfolioAssets** - Many-to-many join table (portfolio ↔ asset)
 - **SentimentLogs** - AI-generated sentiment data
 
 ### Queue-Worker Pattern
@@ -181,6 +182,32 @@ Located in `/packages/features/llm/`:
 - Uses Vercel AI SDK `generateObject` for structured output
 - Generates sentiment scores (-1 to 1), reasoning, and key topics
 - Model: GPT-4o-mini
+
+### Dashboard UI
+
+Located in `/apps/webapp/src/app/dashboard/`:
+- **React Server Component** page with direct DB queries
+- **Portfolio management** - Create, delete, view portfolios
+- **Asset management** - Add/remove assets from portfolios
+- **Sentiment chart** - Recharts AreaChart visualization
+
+Key components in `/apps/webapp/src/components/dashboard/`:
+- `dashboard-content.tsx` - Client wrapper for state management
+- `portfolio-list.tsx` - Portfolio CRUD with tRPC mutations
+- `portfolio-detail.tsx` - Asset management interface
+- `sentiment-chart.tsx` - Sentiment data visualization
+
+### tRPC Routes
+
+Portfolio routes in `/packages/compositions/api/src/router/portfolio.ts`:
+- `portfolio.list` - List user's portfolios (protected)
+- `portfolio.get` - Get portfolio with assets (protected)
+- `portfolio.create` - Create new portfolio (protected)
+- `portfolio.delete` - Delete portfolio (protected)
+- `portfolio.addAsset` - Add asset to portfolio (protected)
+- `portfolio.removeAsset` - Remove asset from portfolio (protected)
+- `portfolio.getSentimentHistory` - Get sentiment data for asset (public)
+- `portfolio.getAssetsWithSentiment` - Get all assets with sentiment (public)
 
 ## Git Branching Strategy
 
@@ -210,14 +237,24 @@ This project uses a file-based context system in `.agent/rules/`:
 | `rules.md` | Immutable conventions (always follow) |
 | `critical_context.md` | Architecture rules and structure |
 | `plan.md` | High-level roadmap (Epics 1-7) |
-| `tasks.md` | Active task checklist |
+| `tasks.md` | Active task checklist + Production-ready tasks |
 | `suggested_tasks.md` | Backlog and technical debt |
 
 **Workflow:**
-- Check `tasks.md` for current work
+- Check `tasks.md` for current work (Epics 1-7 completed, production tasks remaining)
 - Follow `rules.md` and `critical_context.md` strictly
 - Log discovered issues to `suggested_tasks.md` (don't fix immediately)
 - Update files to reflect changes as you work
+
+**Production Tasks Categories:**
+- Testing & QA (E2E, integration, unit tests)
+- Error handling & resilience
+- Performance optimization
+- Security hardening
+- Monitoring & observability
+- UX improvements
+- CI/CD & DevOps
+- Documentation
 
 ## Common Patterns
 

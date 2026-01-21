@@ -70,8 +70,28 @@ export const SentimentLogs = pgTable(
   (table) => [index("sentiment_log_asset_id_idx").on(table.assetId)],
 );
 
+// PortfolioAssets Join Table (many-to-many)
+export const PortfolioAssets = pgTable(
+  "portfolio_asset",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    portfolioId: uuid("portfolio_id")
+      .notNull()
+      .references(() => Portfolios.id, { onDelete: "cascade" }),
+    assetId: uuid("asset_id")
+      .notNull()
+      .references(() => Assets.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("portfolio_asset_portfolio_id_idx").on(table.portfolioId),
+    index("portfolio_asset_asset_id_idx").on(table.assetId),
+  ],
+);
+
 // Schemas for Zod
 export const CreateUserSchema = createInsertSchema(Users);
 export const CreateAssetSchema = createInsertSchema(Assets);
 export const CreatePortfolioSchema = createInsertSchema(Portfolios);
 export const CreateSentimentLogSchema = createInsertSchema(SentimentLogs);
+export const CreatePortfolioAssetSchema = createInsertSchema(PortfolioAssets);
