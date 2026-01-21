@@ -50,3 +50,6 @@ dist/
 
 # turbo
 .turbo
+
+# node cache
+node-compile-cache/
