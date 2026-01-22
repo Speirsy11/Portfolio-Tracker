@@ -19,6 +19,7 @@ export default function proxy(request: NextRequest, event: NextFetchEvent) {
 
   return clerkMiddleware(async (auth, req) => {
     if (isProtectedRoute(req)) await auth.protect();
+    if (isAdminRoute(req)) await auth.protect({ role: "admin" });
   })(request, event);
 }
 

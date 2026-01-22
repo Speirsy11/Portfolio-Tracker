@@ -7,6 +7,7 @@ import {
   PortfolioAssets,
   Portfolios,
   SentimentLogs,
+  Users,
 } from "@portfolio/db/schema";
 
 import { protectedProcedure, publicProcedure } from "../trpc";
@@ -63,6 +64,39 @@ export const portfolioRouter = {
   create: protectedProcedure
     .input(z.object({ name: z.string().min(1).max(255) }))
     .mutation(async ({ ctx, input }) => {
+      // Ensure user exists in local DB (sync from Clerk if needed)
+      // This handles cases where webhook hasn't fired (e.g. local dev)
+      const userExists = await ctx.db
+        .select({ id: Users.id })
+        .from(Users)
+        .where(eq(Users.id, ctx.session.userId))
+        .limit(1);
+
+      if (!userExists[0]) {
+        const { currentUser } = await import("@portfolio/auth");
+        const clerkUser = await currentUser();
+
+        if (clerkUser) {
+          const email = clerkUser.emailAddresses[0]?.emailAddress;
+          const name = [clerkUser.firstName, clerkUser.lastName]
+            .filter(Boolean)
+            .join(" ");
+
+          if (email) {
+            await ctx.db
+              .insert(Users)
+              .values({
+                id: ctx.session.userId,
+                email,
+                // If name is empty string, use null or keep it empty string.
+                // Schema allows null, but let's just pass the string.
+                name: name || "User",
+              })
+              .onConflictDoNothing();
+          }
+        }
+      }
+
       const [portfolio] = await ctx.db
         .insert(Portfolios)
         .values({
