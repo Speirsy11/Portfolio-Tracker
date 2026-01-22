@@ -6,7 +6,7 @@ const isProtectedRoute = createRouteMatcher([
   "/api(.*)",
   "/trpc(.*)",
 ]);
-
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
 export default function proxy(request: NextRequest, event: NextFetchEvent) {
   // Security Headers
@@ -19,6 +19,7 @@ export default function proxy(request: NextRequest, event: NextFetchEvent) {
 
   return clerkMiddleware(async (auth, req) => {
     if (isProtectedRoute(req)) await auth.protect();
+    if (isAdminRoute(req)) await auth.protect({ role: "admin" });
   })(request, event);
 }
 

@@ -2,7 +2,7 @@
 trigger: always_on
 ---
 
-# Suggested Tasks and Improvements
+# Future Tasks and Improvements
 
 ## Set up codebase scripts
 
