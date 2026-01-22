@@ -143,7 +143,12 @@
 
   /* Gradient text */
   .gradient-text {
-    background: linear-gradient(to right, var(--primary), var(--accent), var(--chart-3));
+    background: linear-gradient(
+      to right,
+      var(--primary),
+      var(--accent),
+      var(--chart-3)
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
