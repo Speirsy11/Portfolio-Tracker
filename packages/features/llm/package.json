@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.0",
+    "@portfolio/redis": "workspace:*",
     "ai": "^4.0.0",
     "zod": "catalog:"
   },

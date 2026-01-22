@@ -1,4 +1,5 @@
 import {
+  boolean,
   decimal,
   index,
   pgTable,
@@ -14,6 +15,7 @@ export const Users = pgTable("user", {
   id: varchar("id", { length: 255 }).primaryKey(), // Clerk ID
   email: varchar("email", { length: 255 }).notNull(),
   name: varchar("name", { length: 255 }),
+  isAdmin: boolean("is_admin").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
