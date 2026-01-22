@@ -51,7 +51,7 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
       <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
