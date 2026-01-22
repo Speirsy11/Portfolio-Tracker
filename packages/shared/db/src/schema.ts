@@ -160,6 +160,47 @@ export const WatchlistAssets = pgTable(
     index("price_alert_is_active_idx").on(table.isActive),
   ],
 );
+    
+// AI Insights Table (market summaries and recommendations)
+export const AiInsights = pgTable(
+  "ai_insight",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: varchar("user_id", { length: 255 }).references(() => Users.id, {
+      onDelete: "cascade",
+    }),
+    type: varchar("type", { length: 50 }).notNull(), // 'market_summary', 'recommendation', 'portfolio_analysis'
+    title: varchar("title", { length: 255 }).notNull(),
+    content: text("content").notNull(),
+    metadata: text("metadata"), // JSON string for additional data
+    helpfulVotes: integer("helpful_votes").default(0).notNull(),
+    notHelpfulVotes: integer("not_helpful_votes").default(0).notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("ai_insight_user_id_idx").on(table.userId),
+    index("ai_insight_type_idx").on(table.type),
+    index("ai_insight_created_at_idx").on(table.createdAt),
+  ],
+);
+
+// User Insight Feedback (to prevent duplicate voting)
+export const InsightFeedback = pgTable(
+  "insight_feedback",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    insightId: uuid("insight_id")
+      .notNull()
+      .references(() => AiInsights.id, { onDelete: "cascade" }),
+    userId: varchar("user_id", { length: 255 })
+      .notNull()
+      .references(() => Users.id, { onDelete: "cascade" }),
+    isHelpful: boolean("is_helpful").notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("insight_feedback_insight_id_idx").on(table.insightId),
+    index("insight_feedback_user_id_idx").on(table.userId),
 
 // Schemas for Zod
 export const CreateUserSchema = createInsertSchema(Users);
@@ -167,6 +208,8 @@ export const CreateAssetSchema = createInsertSchema(Assets);
 export const CreatePortfolioSchema = createInsertSchema(Portfolios);
 export const CreateSentimentLogSchema = createInsertSchema(SentimentLogs);
 export const CreatePortfolioAssetSchema = createInsertSchema(PortfolioAssets);
+export const CreateAiInsightSchema = createInsertSchema(AiInsights);
+export const CreateInsightFeedbackSchema = createInsertSchema(InsightFeedback);
 export const CreateWatchlistSchema = createInsertSchema(Watchlists);
 export const CreateWatchlistAssetSchema = createInsertSchema(WatchlistAssets);
 export const CreatePriceAlertSchema = createInsertSchema(PriceAlerts);
