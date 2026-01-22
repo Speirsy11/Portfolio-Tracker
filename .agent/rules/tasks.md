@@ -92,8 +92,8 @@ trigger: always_on
 - [ ] **UX 2:** Implement asset search with autocomplete
 - [ ] **UX 3:** Add portfolio value aggregation and display
 - [ ] **UX 4:** Create mobile-responsive navigation menu
-- [ ] **UX 5:** Add confirmation dialogs for destructive actions
-- [ ] **UX 6:** Implement toast notifications for async operations
+- [x] **UX 5:** Add confirmation dialogs for destructive actions
+- [x] **UX 6:** Implement toast notifications for async operations
 
 ## CI/CD & DevOps
 

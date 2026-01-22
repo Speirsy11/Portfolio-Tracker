@@ -28,6 +28,7 @@ const navItems = [
   { name: "Watchlists", href: "/wip", icon: List },
   { name: "AI Insights", href: "/wip", icon: Brain },
 ];
+import { AdminLink } from "./admin-link";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -89,6 +90,13 @@ export function Header() {
             </SignUpButton>
           </SignedOut>
           <SignedIn>
+            <Link href="/dashboard">
+              <Button variant="outline" size="sm" className="hidden md:flex">
+                <LayoutDashboard className="mr-2 h-4 w-4" />
+                Dashboard
+              </Button>
+            </Link>
+            <AdminLink />
             <UserButton
               appearance={{
                 elements: {
