@@ -11,7 +11,9 @@ import superjson from "superjson";
 import { z, ZodError } from "zod/v4";
 
 import { auth } from "@portfolio/auth";
+import { eq } from "@portfolio/db";
 import { db } from "@portfolio/db/client";
+import { Users } from "@portfolio/db/schema";
 
 /**
  * 1. CONTEXT
@@ -123,3 +125,31 @@ export const protectedProcedure = t.procedure
       },
     });
   });
+
+/**
+ * Admin procedure
+ *
+ * This procedure verifies that the user is both authenticated AND has admin privileges.
+ * Use this for admin-only routes.
+ */
+export const adminProcedure = protectedProcedure.use(async ({ ctx, next }) => {
+  const user = await ctx.db
+    .select({ isAdmin: Users.isAdmin })
+    .from(Users)
+    .where(eq(Users.id, ctx.session.userId))
+    .limit(1);
+
+  if (!user[0]?.isAdmin) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Admin access required",
+    });
+  }
+
+  return next({
+    ctx: {
+      ...ctx,
+      isAdmin: true as const,
+    },
+  });
+});
