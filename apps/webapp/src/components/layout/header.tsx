@@ -26,9 +26,9 @@ import { AdminLink } from "./admin-link";
 
 const navItems = [
   { name: "Markets", href: "/", icon: TrendingUp },
-  { name: "Alerts", href: "/wip", icon: Bell },
-  { name: "Watchlists", href: "/wip", icon: List },
-  { name: "AI Insights", href: "/wip", icon: Brain },
+  { name: "Alerts", href: "/alerts", icon: Bell },
+  { name: "Watchlists", href: "/watchlists", icon: List },
+  { name: "AI Insights", href: "/insights", icon: Brain },
 ];
 
 export function Header() {
@@ -69,7 +69,7 @@ export function Header() {
               Dashboard
             </Link>
             <Link
-              href="/wip"
+              href="/settings"
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
             >
               <Settings className="h-4 w-4" />
@@ -150,7 +150,7 @@ export function Header() {
                 Dashboard
               </Link>
               <Link
-                href="/wip"
+                href="/settings"
                 className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
                 onClick={() => setMobileMenuOpen(false)}
               >
