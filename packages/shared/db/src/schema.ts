@@ -2,6 +2,7 @@ import {
   boolean,
   decimal,
   index,
+  integer,
   pgTable,
   text,
   timestamp,
@@ -91,6 +92,25 @@ export const PortfolioAssets = pgTable(
   ],
 );
 
+// Watchlists Table
+export const Watchlists = pgTable(
+  "watchlist",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: varchar("user_id", { length: 255 })
+      .notNull()
+      .references(() => Users.id, { onDelete: "cascade" }),
+    name: varchar("name", { length: 255 }).notNull(),
+    description: varchar("description", { length: 500 }),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .notNull()
+      .$onUpdateFn(() => new Date()),
+  },
+  (table) => [index("watchlist_user_id_idx").on(table.userId)],
+);
+
 // Price Alerts Table
 export const PriceAlerts = pgTable(
   "price_alert",
@@ -99,6 +119,8 @@ export const PriceAlerts = pgTable(
     userId: varchar("user_id", { length: 255 })
       .notNull()
       .references(() => Users.id, { onDelete: "cascade" }),
+    name: varchar("name", { length: 255 }).notNull(),
+    description: varchar("description", { length: 500 }),
     assetId: uuid("asset_id")
       .notNull()
       .references(() => Assets.id, { onDelete: "cascade" }),
@@ -112,6 +134,26 @@ export const PriceAlerts = pgTable(
       .notNull()
       .$onUpdateFn(() => new Date()),
   },
+  (table) => [index("watchlist_user_id_idx").on(table.userId)],
+);
+
+// WatchlistAssets Join Table (many-to-many with ordering)
+export const WatchlistAssets = pgTable(
+  "watchlist_asset",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    watchlistId: uuid("watchlist_id")
+      .notNull()
+      .references(() => Watchlists.id, { onDelete: "cascade" }),
+    assetId: uuid("asset_id")
+      .notNull()
+      .references(() => Assets.id, { onDelete: "cascade" }),
+    position: integer("position").notNull().default(0),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [
+    index("watchlist_asset_watchlist_id_idx").on(table.watchlistId),
+    index("watchlist_asset_asset_id_idx").on(table.assetId),
   (table) => [
     index("price_alert_user_id_idx").on(table.userId),
     index("price_alert_asset_id_idx").on(table.assetId),
@@ -125,4 +167,6 @@ export const CreateAssetSchema = createInsertSchema(Assets);
 export const CreatePortfolioSchema = createInsertSchema(Portfolios);
 export const CreateSentimentLogSchema = createInsertSchema(SentimentLogs);
 export const CreatePortfolioAssetSchema = createInsertSchema(PortfolioAssets);
+export const CreateWatchlistSchema = createInsertSchema(Watchlists);
+export const CreateWatchlistAssetSchema = createInsertSchema(WatchlistAssets);
 export const CreatePriceAlertSchema = createInsertSchema(PriceAlerts);
