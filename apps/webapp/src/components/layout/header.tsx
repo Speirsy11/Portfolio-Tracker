@@ -28,7 +28,7 @@ const navItems = [
   { name: "Markets", href: "/", icon: TrendingUp },
   { name: "Alerts", href: "/wip", icon: Bell },
   { name: "Watchlists", href: "/wip", icon: List },
-  { name: "AI Insights", href: "/wip", icon: Brain },
+  { name: "AI Insights", href: "/insights", icon: Brain },
 ];
 
 export function Header() {
