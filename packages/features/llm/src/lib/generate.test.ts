@@ -3,6 +3,13 @@ import { describe, expect, it, vi } from "vitest";
 import type { SentimentAnalysis } from "./generate";
 import { generateFinancialReport } from "./generate";
 
+// Mock the Redis mockSettings to avoid real Redis calls
+vi.mock("@portfolio/redis", () => ({
+  mockSettings: {
+    isLlmMockEnabled: vi.fn().mockResolvedValue(false),
+  },
+}));
+
 // Mock the AI SDK to avoid real API calls
 vi.mock("ai", () => ({
   generateObject: vi.fn().mockResolvedValue({
