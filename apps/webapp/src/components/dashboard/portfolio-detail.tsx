@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { LineChart, Loader2, Plus, Trash2 } from "lucide-react";
+import { ExternalLink, LineChart, Loader2, Plus, Trash2 } from "lucide-react";
 
 import {
   AlertDialog,
@@ -207,7 +208,17 @@ export function PortfolioDetail({
                       {asset.symbol.slice(0, 2)}
                     </div>
                     <div>
-                      <div className="font-medium">{asset.symbol}</div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">{asset.symbol}</span>
+                        <Link
+                          href={`/assets/${asset.symbol}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-muted-foreground transition-colors hover:text-primary"
+                          title="View asset details"
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </Link>
+                      </div>
                       <div className="text-sm text-muted-foreground">
                         {asset.name}
                       </div>
