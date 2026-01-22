@@ -6,7 +6,9 @@
     "paths": {
       "~/*": ["./src/*"]
     },
-    "plugins": [{ "name": "next" }]
+    "plugins": [{ "name": "next" }],
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   },
   "include": [".", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

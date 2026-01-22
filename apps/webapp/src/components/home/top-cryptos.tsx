@@ -55,56 +55,6 @@ const cryptoData = [
     volume24h: 2400000000,
     icon: "◎",
   },
-  {
-    rank: 6,
-    name: "XRP",
-    symbol: "XRP",
-    price: 0.5234,
-    change24h: -2.34,
-    marketCap: 28000000000,
-    volume24h: 1200000000,
-    icon: "✕",
-  },
-  {
-    rank: 7,
-    name: "USD Coin",
-    symbol: "USDC",
-    price: 1.0,
-    change24h: 0.0,
-    marketCap: 25000000000,
-    volume24h: 5600000000,
-    icon: "$",
-  },
-  {
-    rank: 8,
-    name: "Cardano",
-    symbol: "ADA",
-    price: 0.4567,
-    change24h: 1.89,
-    marketCap: 16000000000,
-    volume24h: 450000000,
-    icon: "₳",
-  },
-  {
-    rank: 9,
-    name: "Dogecoin",
-    symbol: "DOGE",
-    price: 0.0789,
-    change24h: 4.23,
-    marketCap: 11000000000,
-    volume24h: 890000000,
-    icon: "Ð",
-  },
-  {
-    rank: 10,
-    name: "TRON",
-    symbol: "TRX",
-    price: 0.1234,
-    change24h: -0.56,
-    marketCap: 10800000000,
-    volume24h: 320000000,
-    icon: "T",
-  },
 ];
 
 function formatNumber(num: number): string {
@@ -116,15 +66,23 @@ function formatNumber(num: number): string {
 
 export function CryptoList() {
   return (
-    <Card className="border-border">
+    <Card className="border-border bg-card/50 backdrop-blur-sm">
       <CardHeader>
-        <div className="flex items-center gap-2">
-          <div className="bg-chart-1/10 flex h-10 w-10 items-center justify-center rounded-lg">
-            <Coins className="text-chart-1 h-5 w-5" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="bg-chart-1/10 flex h-10 w-10 items-center justify-center rounded-xl">
+              <Coins className="text-chart-1 h-5 w-5" />
+            </div>
+            <CardTitle className="text-xl">
+              Top Cryptocurrencies by Market Cap
+            </CardTitle>
           </div>
-          <CardTitle className="text-xl">
-            Top Cryptocurrencies by Market Cap
-          </CardTitle>
+          <a
+            href="/wip"
+            className="text-sm font-medium text-accent transition-colors hover:text-accent/80"
+          >
+            View All →
+          </a>
         </div>
       </CardHeader>
       <CardContent className="p-0">

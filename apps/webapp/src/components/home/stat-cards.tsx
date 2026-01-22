@@ -40,7 +40,10 @@ export function MarketStats() {
       {stats.map((stat) => {
         const Icon = stat.icon;
         return (
-          <Card key={stat.label} className="border-border">
+          <Card
+            key={stat.label}
+            className="hover-lift border-border bg-card/50 backdrop-blur-sm transition-colors hover:border-accent/30"
+          >
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="space-y-2">
@@ -63,8 +66,8 @@ export function MarketStats() {
                     </span>
                   </div>
                 </div>
-                <div className="rounded-lg bg-muted p-2">
-                  <Icon className="h-5 w-5 text-muted-foreground" />
+                <div className="rounded-xl bg-accent/10 p-3">
+                  <Icon className="h-5 w-5 text-accent" />
                 </div>
               </div>
             </CardContent>
