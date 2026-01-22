@@ -27,7 +27,7 @@ import { AdminLink } from "./admin-link";
 const navItems = [
   { name: "Markets", href: "/", icon: TrendingUp },
   { name: "Alerts", href: "/wip", icon: Bell },
-  { name: "Watchlists", href: "/wip", icon: List },
+  { name: "Watchlists", href: "/watchlists", icon: List },
   { name: "AI Insights", href: "/wip", icon: Brain },
 ];
 
