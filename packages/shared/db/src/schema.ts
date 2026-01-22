@@ -201,6 +201,37 @@ export const InsightFeedback = pgTable(
   (table) => [
     index("insight_feedback_insight_id_idx").on(table.insightId),
     index("insight_feedback_user_id_idx").on(table.userId),
+    ],
+  );
+
+// User Preferences Table
+export const UserPreferences = pgTable(
+  "user_preference",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: varchar("user_id", { length: 255 })
+      .notNull()
+      .unique()
+      .references(() => Users.id, { onDelete: "cascade" }),
+    // Notification preferences
+    emailNotifications: boolean("email_notifications").default(true).notNull(),
+    pushNotifications: boolean("push_notifications").default(false).notNull(),
+    notificationFrequency: varchar("notification_frequency", { length: 20 })
+      .default("daily")
+      .notNull(), // 'instant', 'hourly', 'daily', 'weekly'
+    // Display preferences
+    theme: varchar("theme", { length: 10 }).default("system").notNull(), // 'light', 'dark', 'system'
+    currency: varchar("currency", { length: 3 }).default("USD").notNull(),
+    // Privacy
+    profilePublic: boolean("profile_public").default(false).notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .notNull()
+      .$onUpdateFn(() => new Date()),
+  },
+  (table) => [index("user_preference_user_id_idx").on(table.userId)],
+);
 
 // Schemas for Zod
 export const CreateUserSchema = createInsertSchema(Users);
@@ -208,6 +239,7 @@ export const CreateAssetSchema = createInsertSchema(Assets);
 export const CreatePortfolioSchema = createInsertSchema(Portfolios);
 export const CreateSentimentLogSchema = createInsertSchema(SentimentLogs);
 export const CreatePortfolioAssetSchema = createInsertSchema(PortfolioAssets);
+export const CreateUserPreferencesSchema = createInsertSchema(UserPreferences);
 export const CreateAiInsightSchema = createInsertSchema(AiInsights);
 export const CreateInsightFeedbackSchema = createInsertSchema(InsightFeedback);
 export const CreateWatchlistSchema = createInsertSchema(Watchlists);
