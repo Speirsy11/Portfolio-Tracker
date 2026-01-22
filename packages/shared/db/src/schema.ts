@@ -91,9 +91,38 @@ export const PortfolioAssets = pgTable(
   ],
 );
 
+// Price Alerts Table
+export const PriceAlerts = pgTable(
+  "price_alert",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: varchar("user_id", { length: 255 })
+      .notNull()
+      .references(() => Users.id, { onDelete: "cascade" }),
+    assetId: uuid("asset_id")
+      .notNull()
+      .references(() => Assets.id, { onDelete: "cascade" }),
+    targetPrice: decimal("target_price", { precision: 18, scale: 8 }).notNull(),
+    condition: varchar("condition", { length: 10 }).notNull(), // 'above' or 'below'
+    isActive: boolean("is_active").default(true).notNull(),
+    triggeredAt: timestamp("triggered_at"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .notNull()
+      .$onUpdateFn(() => new Date()),
+  },
+  (table) => [
+    index("price_alert_user_id_idx").on(table.userId),
+    index("price_alert_asset_id_idx").on(table.assetId),
+    index("price_alert_is_active_idx").on(table.isActive),
+  ],
+);
+
 // Schemas for Zod
 export const CreateUserSchema = createInsertSchema(Users);
 export const CreateAssetSchema = createInsertSchema(Assets);
 export const CreatePortfolioSchema = createInsertSchema(Portfolios);
 export const CreateSentimentLogSchema = createInsertSchema(SentimentLogs);
 export const CreatePortfolioAssetSchema = createInsertSchema(PortfolioAssets);
+export const CreatePriceAlertSchema = createInsertSchema(PriceAlerts);
