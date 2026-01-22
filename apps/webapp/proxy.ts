@@ -1,9 +1,14 @@
 import type { NextFetchEvent, NextRequest } from "next/server";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isProtectedRoute = createRouteMatcher(["/dashboard(.*)", "/admin(.*)"]);
+const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
+  "/api(.*)",
+  "/trpc(.*)",
+]);
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
-export function proxy(request: NextRequest, event: NextFetchEvent) {
+export default function proxy(request: NextRequest, event: NextFetchEvent) {
   // Security Headers
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("X-Frame-Options", "DENY");
