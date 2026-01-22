@@ -18,7 +18,7 @@
   --secondary-foreground: oklch(0.18 0 0);
   --muted: oklch(0.96 0 0);
   --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.65 0.2 142);
+  --accent: oklch(0.6 0.22 275);
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.6 0.22 25);
   --destructive-foreground: oklch(0.99 0 0);
@@ -27,9 +27,9 @@
   --border: oklch(0.9 0 0);
   --input: oklch(0.9 0 0);
   --ring: oklch(0.18 0 0);
-  --chart-1: oklch(0.65 0.2 142);
-  --chart-2: oklch(0.6 0.22 25);
-  --chart-3: oklch(0.55 0.18 250);
+  --chart-1: oklch(0.6 0.22 275);
+  --chart-2: oklch(0.55 0.2 250);
+  --chart-3: oklch(0.5 0.18 290);
   --chart-4: oklch(0.7 0.15 60);
   --chart-5: oklch(0.5 0.15 300);
   --radius: 0.5rem;
@@ -56,7 +56,7 @@
   --secondary-foreground: oklch(0.96 0 0);
   --muted: oklch(0.22 0 0);
   --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.65 0.2 142);
+  --accent: oklch(0.65 0.22 275);
   --accent-foreground: oklch(0.12 0 0);
   --destructive: oklch(0.6 0.22 25);
   --destructive-foreground: oklch(0.96 0 0);
@@ -65,9 +65,9 @@
   --border: oklch(0.22 0 0);
   --input: oklch(0.22 0 0);
   --ring: oklch(0.6 0 0);
-  --chart-1: oklch(0.65 0.2 142);
-  --chart-2: oklch(0.6 0.22 25);
-  --chart-3: oklch(0.55 0.18 250);
+  --chart-1: oklch(0.65 0.22 275);
+  --chart-2: oklch(0.55 0.2 250);
+  --chart-3: oklch(0.5 0.18 290);
   --chart-4: oklch(0.7 0.15 60);
   --chart-5: oklch(0.5 0.15 300);
   --sidebar: oklch(0.205 0 0);
@@ -154,17 +154,17 @@
     background:
       radial-gradient(
         ellipse 80% 50% at 50% -20%,
-        oklch(0.65 0.2 142 / 0.3),
+        oklch(0.6 0.22 275 / 0.3),
         transparent
       ),
       radial-gradient(
         ellipse 60% 40% at 80% 50%,
-        oklch(0.55 0.18 250 / 0.2),
+        oklch(0.55 0.2 250 / 0.25),
         transparent
       ),
       radial-gradient(
         ellipse 50% 30% at 20% 80%,
-        oklch(0.6 0.22 25 / 0.15),
+        oklch(0.5 0.18 290 / 0.2),
         transparent
       );
   }
@@ -172,9 +172,9 @@
   /* Animated mesh gradient */
   .mesh-gradient {
     background:
-      linear-gradient(135deg, oklch(0.65 0.2 142 / 0.1) 0%, transparent 50%),
-      linear-gradient(225deg, oklch(0.55 0.18 250 / 0.1) 0%, transparent 50%),
-      linear-gradient(315deg, oklch(0.6 0.22 25 / 0.08) 0%, transparent 50%);
+      linear-gradient(135deg, oklch(0.6 0.22 275 / 0.1) 0%, transparent 50%),
+      linear-gradient(225deg, oklch(0.55 0.2 250 / 0.1) 0%, transparent 50%),
+      linear-gradient(315deg, oklch(0.5 0.18 290 / 0.08) 0%, transparent 50%);
     animation: mesh-move 20s ease-in-out infinite;
   }
 
@@ -197,8 +197,8 @@
   /* Glow effect */
   .glow {
     box-shadow:
-      0 0 40px oklch(0.65 0.2 142 / 0.2),
-      0 0 80px oklch(0.65 0.2 142 / 0.1);
+      0 0 40px oklch(0.6 0.22 275 / 0.25),
+      0 0 80px oklch(0.55 0.2 250 / 0.15);
   }
 
   /* Card hover lift effect */

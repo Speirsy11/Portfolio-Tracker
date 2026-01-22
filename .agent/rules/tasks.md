@@ -110,3 +110,60 @@ trigger: always_on
 - [ ] **Doc 3:** Document environment variable setup
 - [ ] **Doc 4:** Add architecture decision records (ADRs)
 - [ ] **Doc 5:** Create contributing guidelines
+
+---
+
+# New Features (WIP)
+
+These features are showcased on the homepage but link to placeholder pages. They need full implementation.
+
+## Price Alerts
+
+- [ ] **Alerts 1:** Design alerts database schema (target price, direction, asset, user)
+- [ ] **Alerts 2:** Create tRPC procedures for CRUD operations on alerts
+- [ ] **Alerts 3:** Build alerts management UI page
+- [ ] **Alerts 4:** Implement background worker to check price conditions
+- [ ] **Alerts 5:** Integrate push notifications (email/browser) for triggered alerts
+
+## Watchlists
+
+- [ ] **Watch 1:** Design watchlists database schema (name, user, assets)
+- [ ] **Watch 2:** Create tRPC procedures for CRUD operations on watchlists
+- [ ] **Watch 3:** Build watchlists management UI page
+- [ ] **Watch 4:** Add real-time price updates for watched assets
+- [ ] **Watch 5:** Implement drag-and-drop reordering for watchlist items
+
+## AI Insights
+
+- [ ] **AI 1:** Create dedicated AI insights page with market analysis
+- [ ] **AI 2:** Generate daily market summary using existing AI engine
+- [ ] **AI 3:** Add personalized portfolio recommendations
+- [ ] **AI 4:** Implement historical insight archives
+- [ ] **AI 5:** Add user feedback mechanism for AI quality improvement
+
+## Settings & Preferences
+
+- [ ] **Settings 1:** Build settings page with user preferences
+- [ ] **Settings 2:** Add notification preferences (email, push, frequency)
+- [ ] **Settings 3:** Implement theme customization (light/dark mode toggle)
+- [ ] **Settings 4:** Add currency preference selection
+- [ ] **Settings 5:** Create account management features (delete account, export data)
+
+---
+
+# Mock Data Replacement
+
+These components currently use hardcoded mock data and need real data integration.
+
+## Homepage Components
+
+- [ ] **Mock 1:** `stat-cards.tsx` - Replace static market stats with live API data (CoinGecko/CoinMarketCap)
+- [ ] **Mock 2:** `top-cryptos.tsx` - Fetch real-time crypto prices via Yahoo Finance or CoinGecko API
+- [ ] **Mock 3:** `hero-section.tsx` - Replace static stats (10K+ users, $2.4B tracked) with actual metrics
+- [ ] **Mock 4:** `social-proof.tsx` - Connect to analytics for real user/portfolio counts
+- [ ] **Mock 5:** `news-section.tsx` (future) - Integrate with crypto news API
+
+## Dashboard Components
+
+- [ ] **Mock 6:** `portfolio-chart.tsx` - Currently uses static monthly data, needs real portfolio value history
+- [ ] **Mock 7:** Asset prices should update in real-time via WebSocket or polling
