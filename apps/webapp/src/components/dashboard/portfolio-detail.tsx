@@ -23,9 +23,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@portfolio/ui/card";
-import { Input } from "@portfolio/ui/input";
 import { toast } from "@portfolio/ui/toast";
 
+import { TickerAutocomplete } from "~/components/shared/ticker-autocomplete";
 import { useTRPC } from "~/trpc/react";
 
 interface Asset {
@@ -170,24 +170,32 @@ export function PortfolioDetail({
         </CardHeader>
         <CardContent>
           {showAddForm && (
-            <div className="mb-4 space-y-2">
-              <div className="flex gap-2">
-                <Input
-                  placeholder="Symbol (e.g., AAPL)"
-                  value={symbol}
-                  onChange={(e) => setSymbol(e.target.value.toUpperCase())}
-                  className="w-32"
-                />
-                <Input
-                  placeholder="Name (e.g., Apple Inc.)"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="flex-1"
-                />
+            <div className="mb-4 space-y-3">
+              <TickerAutocomplete
+                value={symbol}
+                selectedName={name}
+                onSelect={(ticker) => {
+                  setSymbol(ticker.symbol);
+                  setName(ticker.name);
+                }}
+                placeholder="Search for a ticker..."
+              />
+              <div className="flex justify-end gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setShowAddForm(false);
+                    setSymbol("");
+                    setName("");
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button onClick={handleAddAsset} disabled={isAdding || !symbol || !name} size="sm">
+                  {isAdding ? "Adding..." : "Add to Portfolio"}
+                </Button>
               </div>
-              <Button onClick={handleAddAsset} disabled={isAdding} size="sm">
-                {isAdding ? "Adding..." : "Add to Portfolio"}
-              </Button>
             </div>
           )}
 

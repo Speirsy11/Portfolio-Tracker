@@ -5,6 +5,7 @@ import { authRouter } from "./router/auth";
 import { insightsRouter } from "./router/insights";
 import { portfolioRouter } from "./router/portfolio";
 import { settingsRouter } from "./router/settings";
+import { tickersRouter } from "./router/tickers";
 import { watchlistsRouter } from "./router/watchlists";
 import { createTRPCRouter } from "./trpc";
 
@@ -16,6 +17,7 @@ export const appRouter = createTRPCRouter({
   insights: insightsRouter,
   portfolio: portfolioRouter,
   settings: settingsRouter,
+  tickers: tickersRouter,
   watchlists: watchlistsRouter,
 });
 

@@ -23,6 +23,7 @@ import {
 } from "@portfolio/ui/select";
 import { toast } from "@portfolio/ui/toast";
 
+import { TickerAutocomplete } from "~/components/shared/ticker-autocomplete";
 import { useTRPC } from "~/trpc/react";
 
 export function CreateAlertForm() {
@@ -94,23 +95,15 @@ export function CreateAlertForm() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="symbol">Symbol *</Label>
-            <Input
-              id="symbol"
-              placeholder="e.g., BTC-USD, AAPL"
+            <Label>Asset *</Label>
+            <TickerAutocomplete
               value={symbol}
-              onChange={(e) => setSymbol(e.target.value.toUpperCase())}
-              className="uppercase"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="name">Name (optional)</Label>
-            <Input
-              id="name"
-              placeholder="e.g., Bitcoin, Apple Inc."
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              selectedName={name}
+              onSelect={(ticker) => {
+                setSymbol(ticker.symbol);
+                setName(ticker.name);
+              }}
+              placeholder="Search for a ticker..."
             />
           </div>
 

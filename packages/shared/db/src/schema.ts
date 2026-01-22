@@ -134,7 +134,7 @@ export const PriceAlerts = pgTable(
       .notNull()
       .$onUpdateFn(() => new Date()),
   },
-  (table) => [index("watchlist_user_id_idx").on(table.userId)],
+  (table) => [index("price_alert_user_id_idx").on(table.userId)],
 );
 
 // WatchlistAssets Join Table (many-to-many with ordering)
@@ -154,10 +154,6 @@ export const WatchlistAssets = pgTable(
   (table) => [
     index("watchlist_asset_watchlist_id_idx").on(table.watchlistId),
     index("watchlist_asset_asset_id_idx").on(table.assetId),
-  (table) => [
-    index("price_alert_user_id_idx").on(table.userId),
-    index("price_alert_asset_id_idx").on(table.assetId),
-    index("price_alert_is_active_idx").on(table.isActive),
   ],
 );
     

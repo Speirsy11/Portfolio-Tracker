@@ -22,9 +22,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@portfolio/ui/card";
-import { Input } from "@portfolio/ui/input";
 import { toast } from "@portfolio/ui/toast";
 
+import { TickerAutocomplete } from "~/components/shared/ticker-autocomplete";
 import { useTRPC } from "~/trpc/react";
 
 interface WatchlistDetailProps {
@@ -171,20 +171,16 @@ export function WatchlistDetail({ watchlistId }: WatchlistDetailProps) {
         </CardHeader>
         <CardContent>
           {showAddForm && (
-            <div className="mb-4 space-y-2">
-              <div className="flex gap-2">
-                <Input
-                  placeholder="Symbol (e.g., BTC-USD)"
-                  value={newSymbol}
-                  onChange={(e) => setNewSymbol(e.target.value.toUpperCase())}
-                  className="uppercase"
-                />
-                <Input
-                  placeholder="Name (optional)"
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                />
-              </div>
+            <div className="mb-4 space-y-3">
+              <TickerAutocomplete
+                value={newSymbol}
+                selectedName={newName}
+                onSelect={(ticker) => {
+                  setNewSymbol(ticker.symbol);
+                  setNewName(ticker.name);
+                }}
+                placeholder="Search for a ticker..."
+              />
               <div className="flex justify-end gap-2">
                 <Button
                   variant="ghost"
@@ -197,7 +193,7 @@ export function WatchlistDetail({ watchlistId }: WatchlistDetailProps) {
                 >
                   Cancel
                 </Button>
-                <Button onClick={handleAddAsset} disabled={isAdding} size="sm">
+                <Button onClick={handleAddAsset} disabled={isAdding || !newSymbol} size="sm">
                   {isAdding ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />

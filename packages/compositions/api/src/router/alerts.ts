@@ -135,6 +135,7 @@ export const alertsRouter = {
         .values({
           userId: ctx.session.userId,
           assetId,
+          name: input.name,
           targetPrice: input.targetPrice.toString(),
           condition: input.condition,
         })
@@ -147,7 +148,7 @@ export const alertsRouter = {
   update: protectedProcedure
     .input(
       z.object({
-        alertId: z.string().uuid(),
+        alertId: z.uuid(),
         targetPrice: z.number().positive().optional(),
         condition: z.enum(["above", "below"]).optional(),
         isActive: z.boolean().optional(),

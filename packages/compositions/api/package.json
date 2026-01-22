@@ -20,6 +20,7 @@
   "dependencies": {
     "@portfolio/auth": "workspace:*",
     "@portfolio/db": "workspace:*",
+    "@portfolio/finance": "workspace:*",
     "@portfolio/redis": "workspace:*",
     "@portfolio/validators": "workspace:*",
     "@trpc/server": "catalog:",
