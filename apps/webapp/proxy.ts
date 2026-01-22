@@ -6,7 +6,7 @@ const isProtectedRoute = createRouteMatcher([
   "/api(.*)",
   "/trpc(.*)",
 ]);
-const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
+
 
 export default function proxy(request: NextRequest, event: NextFetchEvent) {
   // Security Headers

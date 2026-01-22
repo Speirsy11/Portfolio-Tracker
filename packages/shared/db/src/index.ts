@@ -1,4 +1,5 @@
 export * from "./client";
+export * from "./env";
 export * from "./schema";
 
 // Re-export drizzle-orm operators for use in other packages

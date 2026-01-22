@@ -22,13 +22,14 @@ import {
 
 import { Button } from "@portfolio/ui/button";
 
+import { AdminLink } from "./admin-link";
+
 const navItems = [
   { name: "Markets", href: "/", icon: TrendingUp },
   { name: "Alerts", href: "/wip", icon: Bell },
   { name: "Watchlists", href: "/wip", icon: List },
   { name: "AI Insights", href: "/wip", icon: Brain },
 ];
-import { AdminLink } from "./admin-link";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

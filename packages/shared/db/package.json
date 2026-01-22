@@ -21,6 +21,11 @@
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
+    "dev-db": "./scripts/dev-db.sh",
+    "dev-db:start": "./scripts/dev-db.sh start",
+    "dev-db:stop": "./scripts/dev-db.sh stop",
+    "dev-db:destroy": "./scripts/dev-db.sh destroy",
+    "dev-db:psql": "./scripts/dev-db.sh psql",
     "format": "prettier --check . --ignore-path ../../../.gitignore",
     "lint": "eslint",
     "push": "pnpm with-env drizzle-kit push",
@@ -29,15 +34,18 @@
     "with-env": "dotenv -e ../../../.env --"
   },
   "dependencies": {
+    "@t3-oss/env-nextjs": "^0.13.8",
     "@vercel/postgres": "^0.10.0",
     "drizzle-orm": "^0.44.7",
     "drizzle-zod": "^0.8.3",
+    "pg": "^8.17.2",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@portfolio/eslint-config": "workspace:*",
     "@portfolio/prettier-config": "workspace:*",
     "@portfolio/tsconfig": "workspace:*",
+    "@types/pg": "^8.16.0",
     "dotenv-cli": "^10.0.0",
     "drizzle-kit": "^0.31.4",
     "eslint": "catalog:",
