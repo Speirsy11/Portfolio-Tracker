@@ -3,7 +3,10 @@ import yahooFinance from "yahoo-finance2";
 import { SearchResponseSchema } from "../schemas/finance";
 
 // Simple in-memory cache for ticker search results
-const searchCache = new Map<string, { results: TickerSearchResult[]; timestamp: number }>();
+const searchCache = new Map<
+  string,
+  { results: TickerSearchResult[]; timestamp: number }
+>();
 const CACHE_TTL_MS = 60 * 1000; // 1 minute cache
 
 // Valid quote types for ticker search
@@ -71,14 +74,20 @@ export const yahooFinanceService = {
       return results;
     } catch (error) {
       // Check for rate limiting
-      if (error instanceof Error && error.message.includes("Too Many Requests")) {
+      if (
+        error instanceof Error &&
+        error.message.includes("Too Many Requests")
+      ) {
         console.warn(`Yahoo Finance rate limited for query: ${query}`);
         // Return cached results if available (even if stale)
         if (cached) {
           return cached.results;
         }
       } else {
-        console.error(`Yahoo Finance Ticker Search Failed for ${query}:`, error);
+        console.error(
+          `Yahoo Finance Ticker Search Failed for ${query}:`,
+          error,
+        );
       }
       return [];
     }

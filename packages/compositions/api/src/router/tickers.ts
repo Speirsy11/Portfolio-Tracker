@@ -1,9 +1,9 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 import { z } from "zod/v4";
 
+import type { TickerSearchResult } from "@portfolio/finance";
 import { ilike, or } from "@portfolio/db";
 import { Assets } from "@portfolio/db/schema";
-import type { TickerSearchResult } from "@portfolio/finance";
 import { yahooFinanceService } from "@portfolio/finance";
 
 import { publicProcedure } from "../trpc";

@@ -193,7 +193,11 @@ export function WatchlistDetail({ watchlistId }: WatchlistDetailProps) {
                 >
                   Cancel
                 </Button>
-                <Button onClick={handleAddAsset} disabled={isAdding || !newSymbol} size="sm">
+                <Button
+                  onClick={handleAddAsset}
+                  disabled={isAdding || !newSymbol}
+                  size="sm"
+                >
                   {isAdding ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />

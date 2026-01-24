@@ -156,7 +156,7 @@ export const WatchlistAssets = pgTable(
     index("watchlist_asset_asset_id_idx").on(table.assetId),
   ],
 );
-    
+
 // AI Insights Table (market summaries and recommendations)
 export const AiInsights = pgTable(
   "ai_insight",
@@ -197,8 +197,8 @@ export const InsightFeedback = pgTable(
   (table) => [
     index("insight_feedback_insight_id_idx").on(table.insightId),
     index("insight_feedback_user_id_idx").on(table.userId),
-    ],
-  );
+  ],
+);
 
 // User Preferences Table
 export const UserPreferences = pgTable(

@@ -4,10 +4,8 @@ import { z } from "zod/v4";
 export function dbEnv() {
   return createEnv({
     server: {
-      PORTFOLIO_DATABASE_URL: z
-        .string()
-        .min(1, "Database URL is required")
-        .url("Must be a valid URL"),
+      PORTFOLIO_DATABASE_URL: z.url().optional(),
+      POSTGRES_URL: z.url().optional(),
     },
     experimental__runtimeEnv: {},
     skipValidation:
