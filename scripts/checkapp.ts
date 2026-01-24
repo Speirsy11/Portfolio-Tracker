@@ -33,7 +33,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import type { Browser, Page } from "playwright";
-import { chromium } from "playwright";
+import { firefox } from "playwright";
 
 interface CheckAppOptions {
   page: string;
@@ -179,9 +179,9 @@ async function takeScreenshot(options: CheckAppOptions): Promise<void> {
   let browser: Browser | null = null;
 
   try {
-    // Launch browser
+    // Launch browser (using Firefox as it has better cross-platform compatibility)
     console.log("Launching browser...");
-    browser = await chromium.launch({
+    browser = await firefox.launch({
       headless: true,
     });
 
@@ -203,12 +203,11 @@ async function takeScreenshot(options: CheckAppOptions): Promise<void> {
     const appReady = await waitForAppReady(page, options.baseUrl);
 
     if (!appReady) {
-      console.error(
+      throw new Error(
         "\nError: App is not responding at " +
           options.baseUrl +
           "\n\nMake sure the development server is running:\n  pnpm dev\n",
       );
-      process.exit(1);
     }
 
     console.log("App is ready!");
@@ -265,7 +264,7 @@ async function takeScreenshot(options: CheckAppOptions): Promise<void> {
     await context.close();
   } catch (error) {
     console.error("\nError taking screenshot:", error);
-    process.exit(1);
+    process.exitCode = 1;
   } finally {
     if (browser) {
       await browser.close();
@@ -278,5 +277,5 @@ const args = process.argv.slice(2);
 const options = parseArgs(args);
 takeScreenshot(options).catch((err) => {
   console.error("Fatal error:", err);
-  process.exit(1);
+  process.exitCode = 1;
 });
