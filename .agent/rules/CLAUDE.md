@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # CLAUDE.md - AI Assistant Guide for Portfolio-Tracker
 
 This document provides essential context for AI assistants working on the Narrative Portfolio Tracker codebase.
@@ -60,6 +64,7 @@ pnpm lint:fix         # Auto-fix linting issues
 pnpm format           # Prettier check
 pnpm format:fix       # Prettier auto-fix
 pnpm boundaries       # Validate package dependencies
+pnpm checkapp [path]  # Screenshot page at provided path to view UI changes and confirm quality [DELETE SCREENSHOTS AFTER USE]
 
 # Database
 pnpm db:push          # Push schema to database
@@ -76,6 +81,7 @@ pnpm test             # Run Vitest unit tests
 **Always use `pnpm`** - never npm or yarn.
 
 When adding dependencies:
+
 1. Add shared versions to `pnpm-workspace.yaml` under `catalog:`
 2. Reference in package.json as `"dependency": "catalog:"`
 
@@ -83,13 +89,13 @@ When adding dependencies:
 
 Strict dependency rules enforced via `turbo.json`:
 
-| Package Type | Can Depend On |
-|--------------|---------------|
-| `type:app` | composition, feature, shared, config |
+| Package Type       | Can Depend On                        |
+| ------------------ | ------------------------------------ |
+| `type:app`         | composition, feature, shared, config |
 | `type:composition` | composition, feature, shared, config |
-| `type:feature` | feature, shared, config |
-| `type:shared` | shared, config |
-| `type:config` | config, shared |
+| `type:feature`     | feature, shared, config              |
+| `type:shared`      | shared, config                       |
+| `type:config`      | config, shared                       |
 
 Run `pnpm boundaries` to validate.
 
@@ -109,6 +115,7 @@ src/
 ```
 
 **Rules:**
+
 - `index.ts` must contain ONLY exports, never implementation code
 - One primary export per file
 - Use snake_case for filenames
@@ -121,6 +128,7 @@ Access environment variables ONLY through `env.ts` (never `process.env` directly
 ```typescript
 // Correct
 import { env } from "@/env";
+
 const key = env.OPENAI_API_KEY;
 
 // Wrong - ESLint will error
@@ -137,6 +145,7 @@ const key = process.env.OPENAI_API_KEY;
 ### 6. Import Organization
 
 Imports are auto-sorted by Prettier in this order:
+
 1. React
 2. Next.js
 3. Third-party packages
@@ -151,11 +160,13 @@ Located in `/packages/compositions/api/`:
 
 ```typescript
 // Context available in procedures
-{ db, session, headers }
+{
+  (db, session, headers);
+}
 
 // Procedure types
-publicProcedure    // No auth required
-protectedProcedure // Requires authenticated user
+publicProcedure; // No auth required
+protectedProcedure; // Requires authenticated user
 ```
 
 Endpoint: `/api/trpc/[trpc]`
@@ -163,6 +174,7 @@ Endpoint: `/api/trpc/[trpc]`
 ### Database Schema
 
 Tables defined in `/packages/shared/db/src/schema.ts`:
+
 - **Users** - Synced from Clerk via webhook
 - **Assets** - Stock symbols and metadata
 - **Portfolios** - User portfolios (cascade delete with user)
@@ -172,6 +184,7 @@ Tables defined in `/packages/shared/db/src/schema.ts`:
 ### Queue-Worker Pattern
 
 Redis-based background processing:
+
 1. **Seeder Cron** (4hr) - Populates queue with assets
 2. **Processor Cron** (1min) - Processes within Vercel limits
 3. **Deduplication** - Redis Set prevents duplicate processing
@@ -179,6 +192,7 @@ Redis-based background processing:
 ### AI Narrative Engine
 
 Located in `/packages/features/llm/`:
+
 - Uses Vercel AI SDK `generateObject` for structured output
 - Generates sentiment scores (-1 to 1), reasoning, and key topics
 - Model: GPT-4o-mini
@@ -186,12 +200,14 @@ Located in `/packages/features/llm/`:
 ### Dashboard UI
 
 Located in `/apps/webapp/src/app/dashboard/`:
+
 - **React Server Component** page with direct DB queries
 - **Portfolio management** - Create, delete, view portfolios
 - **Asset management** - Add/remove assets from portfolios
 - **Sentiment chart** - Recharts AreaChart visualization
 
 Key components in `/apps/webapp/src/components/dashboard/`:
+
 - `dashboard-content.tsx` - Client wrapper for state management
 - `portfolio-list.tsx` - Portfolio CRUD with tRPC mutations
 - `portfolio-detail.tsx` - Asset management interface
@@ -200,6 +216,7 @@ Key components in `/apps/webapp/src/components/dashboard/`:
 ### tRPC Routes
 
 Portfolio routes in `/packages/compositions/api/src/router/portfolio.ts`:
+
 - `portfolio.list` - List user's portfolios (protected)
 - `portfolio.get` - Get portfolio with assets (protected)
 - `portfolio.create` - Create new portfolio (protected)
@@ -227,6 +244,7 @@ pnpm typecheck && pnpm lint && pnpm format && pnpm boundaries
 ```
 
 **All checks must pass before submitting:**
+
 - `pnpm typecheck` - TypeScript compiler check
 - `pnpm lint` - ESLint checks
 - `pnpm format` - Prettier formatting check
@@ -238,21 +256,23 @@ Fix all errors before submitting. Use `pnpm lint:fix` and `pnpm format:fix` to a
 
 This project uses a file-based context system in `.agent/rules/`:
 
-| File | Purpose |
-|------|---------|
-| `rules.md` | Immutable conventions (always follow) |
-| `critical_context.md` | Architecture rules and structure |
-| `plan.md` | High-level roadmap (Epics 1-7) |
-| `tasks.md` | Active task checklist + Production-ready tasks |
-| `suggested_tasks.md` | Backlog and technical debt |
+| File                  | Purpose                                        |
+| --------------------- | ---------------------------------------------- |
+| `rules.md`            | Immutable conventions (always follow)          |
+| `critical_context.md` | Architecture rules and structure               |
+| `plan.md`             | High-level roadmap (Epics 1-7)                 |
+| `tasks.md`            | Active task checklist + Production-ready tasks |
+| `suggested_tasks.md`  | Backlog and technical debt                     |
 
 **Workflow:**
+
 - Check `tasks.md` for current work (Epics 1-7 completed, production tasks remaining)
 - Follow `rules.md` and `critical_context.md` strictly
 - Log discovered issues to `suggested_tasks.md` (don't fix immediately)
 - Update files to reflect changes as you work
 
 **Production Tasks Categories:**
+
 - Testing & QA (E2E, integration, unit tests)
 - Error handling & resilience
 - Performance optimization
