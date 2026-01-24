@@ -86,6 +86,7 @@
     "NEXT_PUBLIC_CLERK_SIGN_IN_URL",
     "NEXT_PUBLIC_CLERK_SIGN_UP_URL",
     "OPENAI_API_KEY",
+    "PORTFOLIO_DATABASE_URL",
     "POSTGRES_URL",
     "UPSTASH_REDIS_REST_TOKEN",
     "UPSTASH_REDIS_REST_URL",
@@ -94,6 +95,7 @@
   "globalPassThroughEnv": [
     "NODE_ENV",
     "CI",
+    "NEXT_PHASE",
     "VERCEL",
     "VERCEL_ENV",
     "VERCEL_URL",
