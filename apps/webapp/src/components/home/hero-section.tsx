@@ -2,11 +2,56 @@
 
 import Link from "next/link";
 import { SignedIn, SignedOut, SignUpButton } from "@clerk/nextjs";
+import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 import { Button } from "@portfolio/ui/button";
+import { Skeleton } from "@portfolio/ui/skeleton";
+
+import { useTRPC } from "~/trpc/react";
+
+function formatCount(count: number): string {
+  if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M+`;
+  if (count >= 1000) return `${(count / 1000).toFixed(1)}K+`;
+  return count.toString();
+}
+
+function StatSkeleton() {
+  return (
+    <div className="space-y-1">
+      <Skeleton className="mx-auto h-8 w-16" />
+      <Skeleton className="mx-auto h-4 w-20" />
+    </div>
+  );
+}
 
 export function HeroSection() {
+  const trpc = useTRPC();
+
+  const { data: platformStats, isLoading } = useQuery({
+    ...trpc.market.getPlatformStats.queryOptions(),
+    staleTime: 60000, // Cache for 1 minute
+  });
+
+  const stats = [
+    {
+      value: isLoading ? null : formatCount(platformStats?.userCount ?? 0),
+      label: "Active Users",
+    },
+    {
+      value: isLoading ? null : formatCount(platformStats?.portfolioCount ?? 0),
+      label: "Portfolios Created",
+    },
+    {
+      value: "99.9%",
+      label: "Uptime",
+    },
+    {
+      value: "24/7",
+      label: "AI Analysis",
+    },
+  ];
+
   return (
     <section className="hero-gradient relative overflow-hidden py-20 md:py-32">
       {/* Animated mesh overlay */}
@@ -74,19 +119,20 @@ export function HeroSection() {
 
           {/* Stats preview */}
           <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4">
-            {[
-              { value: "10K+", label: "Active Users" },
-              { value: "$2.4B", label: "Assets Tracked" },
-              { value: "99.9%", label: "Uptime" },
-              { value: "24/7", label: "AI Analysis" },
-            ].map((stat) => (
+            {stats.map((stat) => (
               <div key={stat.label} className="space-y-1">
-                <div className="text-2xl font-bold md:text-3xl">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {stat.label}
-                </div>
+                {stat.value === null ? (
+                  <StatSkeleton />
+                ) : (
+                  <>
+                    <div className="text-2xl font-bold md:text-3xl">
+                      {stat.value}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {stat.label}
+                    </div>
+                  </>
+                )}
               </div>
             ))}
           </div>
