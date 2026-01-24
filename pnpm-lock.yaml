@@ -291,6 +291,9 @@ importers:
       '@portfolio/redis':
         specifier: workspace:*
         version: link:../../shared/redis
+      '@t3-oss/env-nextjs':
+        specifier: ^0.13.8
+        version: 0.13.10(typescript@5.9.3)(zod@4.3.5)
       ai:
         specifier: ^4.0.0
         version: 4.3.19(react@19.1.1)(zod@4.3.5)
@@ -417,12 +420,18 @@ importers:
 
   packages/shared/redis:
     dependencies:
+      '@t3-oss/env-nextjs':
+        specifier: ^0.13.8
+        version: 0.13.10(typescript@5.9.3)(zod@4.3.5)
       '@upstash/ratelimit':
         specifier: 'catalog:'
         version: 2.0.7(@upstash/redis@1.36.1)
       '@upstash/redis':
         specifier: 'catalog:'
         version: 1.36.1
+      zod:
+        specifier: 'catalog:'
+        version: 4.3.5
     devDependencies:
       '@portfolio/eslint-config':
         specifier: workspace:*

@@ -135,6 +135,44 @@ const key = env.OPENAI_API_KEY;
 const key = process.env.OPENAI_API_KEY;
 ```
 
+**Rules:**
+
+- `process.env` should ONLY be used inside `env.ts` files for the `createEnv` setup
+- Every package that needs environment variables must have its own `env.ts` file
+- All env variables must be validated with Zod schemas in `createEnv`
+- Import and use `env` from the local package's `env.ts` file
+
+**Existing env.ts locations:**
+
+- `apps/webapp/src/env.ts` - Main webapp env (POSTGRES_URL, CLERK_*, UPSTASH_*, OPENAI_API_KEY, PORT, etc.)
+- `packages/shared/db/src/env.ts` - Database env (PORTFOLIO_DATABASE_URL, POSTGRES_URL, NODE_ENV)
+- `packages/shared/redis/src/env.ts` - Redis env (UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN)
+- `packages/shared/auth/env.ts` - Auth env (AUTH_DISCORD_*, AUTH_SECRET, NODE_ENV)
+- `packages/features/llm/src/env.ts` - LLM env (OPENAI_API_KEY)
+
+**Adding new environment variables:**
+
+1. Add the variable to the appropriate `env.ts` file with Zod validation in `server:` or `client:`
+2. Map the variable in `runtimeEnv:` (for server vars) or `experimental__runtimeEnv:` (for client vars)
+3. Import `env` from that file where needed
+4. Never use `process.env.VAR_NAME` directly in application code
+
+**Example env.ts structure:**
+
+```typescript
+export const env = createEnv({
+  server: {
+    MY_VAR: z.string(),
+  },
+  runtimeEnv: {
+    MY_VAR: process.env.MY_VAR, // Required mapping
+  },
+  skipValidation: !!process.env.CI || process.env.npm_lifecycle_event === "lint",
+});
+```
+
+**Exception:** `drizzle.config.ts` may use `process.env` directly since it runs as a build-time CLI tool outside the Next.js context.
+
 ### 5. Type Safety
 
 - TypeScript strict mode is enabled everywhere

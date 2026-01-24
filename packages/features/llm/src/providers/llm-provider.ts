@@ -1,5 +1,7 @@
 import { createOpenAI } from "@ai-sdk/openai";
 
+import { env } from "../env";
+
 /**
  * Supported LLM provider types for future extensibility
  * (e.g., Anthropic, Google)
@@ -7,7 +9,7 @@ import { createOpenAI } from "@ai-sdk/openai";
 export type LLMProviderType = "openai" | "anthropic" | "google";
 
 export const openai = createOpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: env.OPENAI_API_KEY,
 });
 
 // Use gpt-4o-mini for cost efficiency per plan.md
