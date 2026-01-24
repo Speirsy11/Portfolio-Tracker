@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd packages/shared/db && pnpm drizzle-kit push && cd ../../.. && pnpm build",
+  "buildCommand": "pnpm db:push && pnpm build",
   "crons": [
     {
       "path": "/api/cron/seed",
