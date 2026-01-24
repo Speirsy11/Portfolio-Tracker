@@ -1,6 +1,6 @@
 import { adminRouter } from "./router/admin";
-import { assetsRouter } from "./router/assets";
 import { alertsRouter } from "./router/alerts";
+import { assetsRouter } from "./router/assets";
 import { authRouter } from "./router/auth";
 import { insightsRouter } from "./router/insights";
 import { portfolioRouter } from "./router/portfolio";

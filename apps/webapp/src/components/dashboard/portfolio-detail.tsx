@@ -192,7 +192,11 @@ export function PortfolioDetail({
                 >
                   Cancel
                 </Button>
-                <Button onClick={handleAddAsset} disabled={isAdding || !symbol || !name} size="sm">
+                <Button
+                  onClick={handleAddAsset}
+                  disabled={isAdding || !symbol || !name}
+                  size="sm"
+                >
                   {isAdding ? "Adding..." : "Add to Portfolio"}
                 </Button>
               </div>
