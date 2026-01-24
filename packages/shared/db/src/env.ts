@@ -10,7 +10,11 @@ export function dbEnv() {
         .enum(["development", "production", "test"])
         .default("development"),
     },
-    experimental__runtimeEnv: {},
+    runtimeEnv: {
+      PORTFOLIO_DATABASE_URL: process.env.PORTFOLIO_DATABASE_URL,
+      POSTGRES_URL: process.env.POSTGRES_URL,
+      NODE_ENV: process.env.NODE_ENV,
+    },
     skipValidation:
       !!process.env.CI || process.env.npm_lifecycle_event === "lint",
   });

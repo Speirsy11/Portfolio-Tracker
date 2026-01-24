@@ -5,7 +5,9 @@ export const env = createEnv({
   server: {
     OPENAI_API_KEY: z.string(),
   },
-  experimental__runtimeEnv: {},
+  runtimeEnv: {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",
 });
