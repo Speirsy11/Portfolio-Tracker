@@ -2,11 +2,12 @@ import { sql } from "@vercel/postgres";
 import { drizzle as drizzlePg } from "drizzle-orm/node-postgres";
 import { drizzle as drizzleVercel } from "drizzle-orm/vercel-postgres";
 import { Pool } from "pg";
+import { env } from "./env";
 
 import * as schema from "./schema";
 
 const connectionString =
-  process.env.PORTFOLIO_DATABASE_URL ?? process.env.POSTGRES_URL;
+  env.POSTGRES_URL ?? env.PORTFOLIO_DATABASE_URL;
 
 if (!connectionString) {
   throw new Error("Missing PORTFOLIO_DATABASE_URL or POSTGRES_URL");

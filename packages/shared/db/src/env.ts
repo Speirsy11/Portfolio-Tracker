@@ -12,3 +12,5 @@ export function dbEnv() {
       !!process.env.CI || process.env.npm_lifecycle_event === "lint",
   });
 }
+
+export const env = dbEnv();
