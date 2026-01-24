@@ -1,5 +1,6 @@
 import yahooFinance from "yahoo-finance2";
 
+import type { MarketStats, NormalizedQuote } from "../schemas/quote";
 import { SearchResponseSchema } from "../schemas/finance";
 
 // Simple in-memory cache for ticker search results
@@ -8,6 +9,13 @@ const searchCache = new Map<
   { results: TickerSearchResult[]; timestamp: number }
 >();
 const CACHE_TTL_MS = 60 * 1000; // 1 minute cache
+
+// Cache for quotes (shorter TTL for fresher data)
+const quotesCache = new Map<
+  string,
+  { quotes: NormalizedQuote[]; timestamp: number }
+>();
+const QUOTES_CACHE_TTL_MS = 30 * 1000; // 30 seconds cache
 
 // Valid quote types for ticker search
 const VALID_QUOTE_TYPES = [
@@ -18,6 +26,15 @@ const VALID_QUOTE_TYPES = [
   "CURRENCY",
   "INDEX",
   "FUTURE",
+];
+
+// Top cryptocurrencies for market overview
+const TOP_CRYPTO_SYMBOLS = [
+  "BTC-USD",
+  "ETH-USD",
+  "USDT-USD",
+  "BNB-USD",
+  "SOL-USD",
 ];
 
 export interface TickerSearchResult {
@@ -119,4 +136,94 @@ export const yahooFinanceService = {
       throw error;
     }
   },
+
+  /**
+   * Fetch quotes for multiple symbols
+   * Returns normalized quote data for each symbol
+   */
+  async getQuotes(symbols: string[]): Promise<NormalizedQuote[]> {
+    const cacheKey = symbols.sort().join(",");
+
+    // Check cache first
+    const cached = quotesCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < QUOTES_CACHE_TTL_MS) {
+      return cached.quotes;
+    }
+
+    try {
+      const results = await yahooFinance.quote(symbols);
+
+      // Handle both single and array responses
+      const quotesArray = Array.isArray(results) ? results : [results];
+
+      const normalizedQuotes: NormalizedQuote[] = quotesArray
+        .filter((q) => q && q.regularMarketPrice !== undefined)
+        .map((q) => ({
+          symbol: q.symbol,
+          name: q.shortName ?? q.longName ?? q.symbol,
+          price: q.regularMarketPrice ?? 0,
+          change24h: q.regularMarketChange ?? 0,
+          changePercent24h: q.regularMarketChangePercent ?? 0,
+          volume24h: q.regularMarketVolume ?? 0,
+          marketCap: q.marketCap ?? 0,
+        }));
+
+      // Cache the results
+      quotesCache.set(cacheKey, {
+        quotes: normalizedQuotes,
+        timestamp: Date.now(),
+      });
+
+      return normalizedQuotes;
+    } catch (error) {
+      console.error(`Yahoo Finance Quote Failed for ${symbols.join(", ")}:`, error);
+
+      // Return cached results if available (even if stale)
+      if (cached) {
+        return cached.quotes;
+      }
+
+      return [];
+    }
+  },
+
+  /**
+   * Fetch top cryptocurrencies for the homepage
+   */
+  async getTopCryptos(): Promise<NormalizedQuote[]> {
+    return this.getQuotes(TOP_CRYPTO_SYMBOLS);
+  },
+
+  /**
+   * Calculate market statistics from top cryptos
+   */
+  async getMarketStats(): Promise<MarketStats | null> {
+    try {
+      const quotes = await this.getTopCryptos();
+
+      if (quotes.length === 0) {
+        return null;
+      }
+
+      const totalMarketCap = quotes.reduce((sum, q) => sum + q.marketCap, 0);
+      const totalVolume24h = quotes.reduce((sum, q) => sum + q.volume24h, 0);
+
+      // Find BTC for dominance calculation
+      const btcQuote = quotes.find((q) => q.symbol === "BTC-USD");
+      const btcDominance = btcQuote
+        ? (btcQuote.marketCap / totalMarketCap) * 100
+        : 0;
+
+      return {
+        totalMarketCap,
+        totalVolume24h,
+        btcDominance,
+        lastUpdated: new Date(),
+      };
+    } catch (error) {
+      console.error("Failed to calculate market stats:", error);
+      return null;
+    }
+  },
 };
+

@@ -3,6 +3,7 @@ import { alertsRouter } from "./router/alerts";
 import { assetsRouter } from "./router/assets";
 import { authRouter } from "./router/auth";
 import { insightsRouter } from "./router/insights";
+import { marketRouter } from "./router/market";
 import { portfolioRouter } from "./router/portfolio";
 import { settingsRouter } from "./router/settings";
 import { tickersRouter } from "./router/tickers";
@@ -15,6 +16,7 @@ export const appRouter = createTRPCRouter({
   alerts: alertsRouter,
   auth: authRouter,
   insights: insightsRouter,
+  market: marketRouter,
   portfolio: portfolioRouter,
   settings: settingsRouter,
   tickers: tickersRouter,
@@ -23,3 +25,4 @@ export const appRouter = createTRPCRouter({
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
+
