@@ -1,7 +1,7 @@
 "use client";
 
-import { Activity, DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { Activity, DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 
 import { Card, CardContent } from "@portfolio/ui/card";
 import { Skeleton } from "@portfolio/ui/skeleton";

@@ -1,7 +1,7 @@
 "use client";
 
-import { Shield, TrendingUp, Users, Zap } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { Shield, TrendingUp, Users, Zap } from "lucide-react";
 
 import { Card, CardContent } from "@portfolio/ui/card";
 import { Skeleton } from "@portfolio/ui/skeleton";
@@ -97,7 +97,9 @@ export function SocialProof() {
                     <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10">
                       <Icon className="h-7 w-7 text-accent" />
                     </div>
-                    <div className="mb-1 text-3xl font-bold">{metric.value}</div>
+                    <div className="mb-1 text-3xl font-bold">
+                      {metric.value}
+                    </div>
                     <div className="mb-2 font-medium">{metric.label}</div>
                     <div className="text-sm text-muted-foreground">
                       {metric.description}

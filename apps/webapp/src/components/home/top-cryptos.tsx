@@ -1,7 +1,7 @@
 "use client";
 
-import { Coins, TrendingDown, TrendingUp } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { Coins, TrendingDown, TrendingUp } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@portfolio/ui/card";
 import { Skeleton } from "@portfolio/ui/skeleton";
@@ -131,7 +131,11 @@ export function CryptoList() {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right font-mono text-sm font-medium">
-                      ${crypto.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      $
+                      {crypto.price.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div

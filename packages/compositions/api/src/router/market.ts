@@ -2,8 +2,8 @@ import type { TRPCRouterRecord } from "@trpc/server";
 
 import { sql } from "@portfolio/db";
 import {
-  Portfolios,
   PortfolioAssets,
+  Portfolios,
   SentimentLogs,
   Users,
 } from "@portfolio/db/schema";

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { SignedIn, SignedOut, SignUpButton } from "@clerk/nextjs";
-import { ArrowRight, Sparkles } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 import { Button } from "@portfolio/ui/button";
 import { Skeleton } from "@portfolio/ui/skeleton";

@@ -157,7 +157,7 @@ export const yahooFinanceService = {
       const quotesArray = Array.isArray(results) ? results : [results];
 
       const normalizedQuotes: NormalizedQuote[] = quotesArray
-        .filter((q) => q && q.regularMarketPrice !== undefined)
+        .filter((q) => q.regularMarketPrice !== undefined)
         .map((q) => ({
           symbol: q.symbol,
           name: q.shortName ?? q.longName ?? q.symbol,
@@ -176,7 +176,10 @@ export const yahooFinanceService = {
 
       return normalizedQuotes;
     } catch (error) {
-      console.error(`Yahoo Finance Quote Failed for ${symbols.join(", ")}:`, error);
+      console.error(
+        `Yahoo Finance Quote Failed for ${symbols.join(", ")}:`,
+        error,
+      );
 
       // Return cached results if available (even if stale)
       if (cached) {
@@ -226,4 +229,3 @@ export const yahooFinanceService = {
     }
   },
 };
-
