@@ -21,6 +21,7 @@ export const env = createEnv({
     UPSTASH_REDIS_REST_TOKEN: z.string(),
     CRON_SECRET: z.string(),
     OPENAI_API_KEY: z.string(),
+    PORT: z.coerce.number().default(3000),
   },
 
   /**

@@ -6,6 +6,9 @@ export function dbEnv() {
     server: {
       PORTFOLIO_DATABASE_URL: z.url().optional(),
       POSTGRES_URL: z.url().optional(),
+      NODE_ENV: z
+        .enum(["development", "production", "test"])
+        .default("development"),
     },
     experimental__runtimeEnv: {},
     skipValidation:

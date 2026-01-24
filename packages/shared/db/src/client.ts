@@ -16,7 +16,7 @@ if (!connectionString) {
 // In development, use standard node-postgres with the local container
 // In production/preview (Vercel), use the Vercel Postgres SDK
 const shouldUseLocal =
-  process.env.NODE_ENV === "development" ||
+  env.NODE_ENV === "development" ||
   !connectionString.includes("vercel-storage");
 
 export const db = shouldUseLocal
