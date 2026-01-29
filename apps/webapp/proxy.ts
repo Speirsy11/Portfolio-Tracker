@@ -3,7 +3,7 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
-  "/api(.*)",
+  "/api((?!/cron).*)", // Exclude /api/cron routes (they use CRON_SECRET auth)
   "/trpc(.*)",
 ]);
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);

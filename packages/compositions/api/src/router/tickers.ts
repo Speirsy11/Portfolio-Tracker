@@ -1,10 +1,8 @@
 import type { TRPCRouterRecord } from "@trpc/server";
 import { z } from "zod/v4";
 
-import type { TickerSearchResult } from "@portfolio/finance";
 import { ilike, or } from "@portfolio/db";
-import { Assets } from "@portfolio/db/schema";
-import { yahooFinanceService } from "@portfolio/finance";
+import { Assets, MarketDataCache } from "@portfolio/db/schema";
 
 import { publicProcedure } from "../trpc";
 
@@ -17,7 +15,7 @@ export interface TickerResult {
 }
 
 export const tickersRouter = {
-  // Search for tickers from local DB and Yahoo Finance
+  // Search for tickers from local DB and cached market data (no external API calls)
   search: publicProcedure
     .input(
       z.object({
@@ -52,22 +50,36 @@ export const tickersRouter = {
         isLocal: true,
       }));
 
-      // Query Yahoo Finance for comprehensive results
-      const yahooResults = await yahooFinanceService.searchTickers(input.query);
+      // Query cached market data instead of external API
+      const cachedAssets = await ctx.db
+        .select({
+          symbol: MarketDataCache.symbol,
+          name: MarketDataCache.name,
+          assetType: MarketDataCache.assetType,
+        })
+        .from(MarketDataCache)
+        .where(
+          or(
+            ilike(MarketDataCache.symbol, searchPattern),
+            ilike(MarketDataCache.name, searchPattern),
+          ),
+        )
+        .limit(input.limit);
 
-      // Convert Yahoo results to TickerResult format
-      const externalResults: TickerResult[] = yahooResults.map(
-        (result: TickerSearchResult) => ({
-          ...result,
-          isLocal: false,
-        }),
-      );
+      // Convert cached results to TickerResult format
+      const cachedResults: TickerResult[] = cachedAssets.map((asset) => ({
+        symbol: asset.symbol,
+        name: asset.name,
+        type: asset.assetType === "crypto" ? "CRYPTOCURRENCY" : "EQUITY",
+        exchange: "",
+        isLocal: false,
+      }));
 
       // Merge and deduplicate, prioritizing local assets
       const localSymbols = new Set(localResults.map((r) => r.symbol));
       const mergedResults: TickerResult[] = [
         ...localResults,
-        ...externalResults.filter((r) => !localSymbols.has(r.symbol)),
+        ...cachedResults.filter((r) => !localSymbols.has(r.symbol)),
       ];
 
       // Return limited results

@@ -1,12 +1,31 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Activity, DollarSign, TrendingDown, TrendingUp } from "lucide-react";
+import {
+  Activity,
+  AlertTriangle,
+  DollarSign,
+  TrendingDown,
+  TrendingUp,
+} from "lucide-react";
 
 import { Card, CardContent } from "@portfolio/ui/card";
 import { Skeleton } from "@portfolio/ui/skeleton";
 
 import { useTRPC } from "~/trpc/react";
+
+function formatRelativeTime(date: Date): string {
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffMins = Math.floor(diffMs / (1000 * 60));
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffMins < 1) return "Just now";
+  if (diffMins < 60) return `${diffMins}m ago`;
+  if (diffHours < 24) return `${diffHours}h ago`;
+  return `${diffDays}d ago`;
+}
 
 function formatNumber(num: number): string {
   if (num >= 1e12) return `$${(num / 1e12).toFixed(2)}T`;
@@ -51,13 +70,16 @@ export function MarketStats() {
     );
   }
 
+  const lastUpdatedDate = new Date(marketStats.lastUpdated);
+  const relativeTime = formatRelativeTime(lastUpdatedDate);
+
   const stats = [
     {
       label: "Total Market Cap",
       value: formatNumber(marketStats.totalMarketCap),
-      change: marketStats.isStale ? "Updating..." : "Top 5 Cryptos",
-      isPositive: true,
-      icon: DollarSign,
+      change: marketStats.isStale ? "Data may be stale" : "Top Cryptos",
+      isPositive: !marketStats.isStale,
+      icon: marketStats.isStale ? AlertTriangle : DollarSign,
     },
     {
       label: "24h Trading Volume",
@@ -69,16 +91,16 @@ export function MarketStats() {
     {
       label: "BTC Dominance",
       value: `${marketStats.btcDominance.toFixed(1)}%`,
-      change: "vs Top 5",
+      change: "vs Top Cryptos",
       isPositive: marketStats.btcDominance > 50,
       icon: marketStats.btcDominance > 50 ? TrendingUp : TrendingDown,
     },
     {
       label: "Last Updated",
-      value: new Date(marketStats.lastUpdated).toLocaleTimeString(),
-      change: "Live Data",
-      isPositive: true,
-      icon: TrendingUp,
+      value: relativeTime,
+      change: marketStats.isStale ? "Stale data" : "Cached data",
+      isPositive: !marketStats.isStale,
+      icon: marketStats.isStale ? AlertTriangle : TrendingUp,
     },
   ];
 

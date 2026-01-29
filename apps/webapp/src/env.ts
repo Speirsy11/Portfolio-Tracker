@@ -14,13 +14,15 @@ export const env = createEnv({
    * This way you can ensure the app isn't built with invalid env vars.
    */
   server: {
-    POSTGRES_URL: z.url(),
+    POSTGRES_URL: z.url().optional(),
+    PORTFOLIO_DATABASE_URL: z.url().optional(),
     CLERK_SECRET_KEY: z.string(),
     CLERK_WEBHOOK_SECRET: z.string(),
     UPSTASH_REDIS_REST_URL: z.string().url(),
     UPSTASH_REDIS_REST_TOKEN: z.string(),
     CRON_SECRET: z.string(),
     OPENAI_API_KEY: z.string(),
+    TWELVEDATA_API_KEY: z.string(),
     PORT: z.coerce.number().default(3000),
   },
 
