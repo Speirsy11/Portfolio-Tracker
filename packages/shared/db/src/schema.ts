@@ -241,3 +241,53 @@ export const CreateInsightFeedbackSchema = createInsertSchema(InsightFeedback);
 export const CreateWatchlistSchema = createInsertSchema(Watchlists);
 export const CreateWatchlistAssetSchema = createInsertSchema(WatchlistAssets);
 export const CreatePriceAlertSchema = createInsertSchema(PriceAlerts);
+
+// Market Data Cache Table (stores cached market data from Twelve Data)
+export const MarketDataCache = pgTable(
+  "market_data_cache",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    symbol: varchar("symbol", { length: 20 }).notNull(),
+    name: varchar("name", { length: 255 }).notNull(),
+    assetType: varchar("asset_type", { length: 20 }).notNull(), // 'crypto' | 'stock'
+    price: decimal("price", { precision: 18, scale: 8 }).notNull(),
+    priceOpen: decimal("price_open", { precision: 18, scale: 8 }),
+    priceHigh: decimal("price_high", { precision: 18, scale: 8 }),
+    priceLow: decimal("price_low", { precision: 18, scale: 8 }),
+    pricePreviousClose: decimal("price_previous_close", { precision: 18, scale: 8 }),
+    change24h: decimal("change_24h", { precision: 18, scale: 8 }),
+    changePercent24h: decimal("change_percent_24h", { precision: 10, scale: 4 }),
+    volume24h: decimal("volume_24h", { precision: 24, scale: 2 }),
+    marketCap: decimal("market_cap", { precision: 24, scale: 2 }),
+    rank: integer("rank"),
+    circulatingSupply: decimal("circulating_supply", { precision: 24, scale: 2 }),
+    totalSupply: decimal("total_supply", { precision: 24, scale: 2 }),
+    description: text("description"),
+    fetchedAt: timestamp("fetched_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .notNull()
+      .$onUpdateFn(() => new Date()),
+  },
+  (table) => [
+    index("market_data_cache_symbol_idx").on(table.symbol),
+    index("market_data_cache_asset_type_idx").on(table.assetType),
+    index("market_data_cache_rank_idx").on(table.rank),
+  ],
+);
+
+// Market Data Sync Log Table (tracks CRON job runs)
+export const MarketDataSyncLog = pgTable("market_data_sync_log", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  syncType: varchar("sync_type", { length: 20 }).notNull(), // 'crypto' | 'stock' | 'all'
+  status: varchar("status", { length: 20 }).notNull(), // 'pending' | 'running' | 'completed' | 'failed'
+  recordsProcessed: integer("records_processed").default(0),
+  apiRequestsUsed: integer("api_requests_used").default(0),
+  errorMessage: text("error_message"),
+  startedAt: timestamp("started_at").defaultNow().notNull(),
+  completedAt: timestamp("completed_at"),
+});
+
+export const CreateMarketDataCacheSchema = createInsertSchema(MarketDataCache);
+export const CreateMarketDataSyncLogSchema =
+  createInsertSchema(MarketDataSyncLog);
